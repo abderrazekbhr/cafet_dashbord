@@ -1,0 +1,60 @@
+{% extends './components/base.html' %} {% block content %}
+<div class="content">
+  <img src="../../static/utils/images/background.jpg" class="side-image" />
+  <form method="post" action="http://127.0.0.1:5000/" class="login-form">
+    <img src="../../static/utils/images/cafe.png" class="top-image" />
+    <h4>Welcome to the K-fet ENSEA dashboard</h4>
+    <div class="mb-3">
+      <label for="email" class="form-label">Email address</label>
+      <input type="email" class="form-control shadow-none" name="email" id="email" required />
+    </div>
+    <div class="mb-3">
+      <label for="password" name="password" class="form-label">Password</label>
+      <input type="password" class="form-control shadow-none" id="password" name="password" required />
+    </div>
+
+    <button type="submit" disabled style="background-color: #6a563d; color: #f1f1f1; font-size: 1.2em" class="btn shadow-none login-btn">
+      Submit
+    </button>
+  </form>
+</div>
+<script>
+  let emailState = false;
+  let passwordState = false;
+
+  const email = document.querySelector('#email');
+  const password = document.querySelector('#password');
+  const login = document.querySelector('.login-btn');
+
+  email.addEventListener('keyup', () => {
+    console.log("emailState:"+emailState);
+    if (email.validity.valid) {
+      emailState = true;
+    } else {
+      emailState = false;
+    }
+  });
+  password.addEventListener('input', () => {
+    console.log("passwordState:"+passwordState);
+
+    if (password.validity.valid) {
+      passwordState = true;
+    } else {
+      passwordState = false;
+    }
+  });
+
+  document.addEventListener('change', event => {
+    event.preventDefault(); // Prevent the default form submission behavior
+
+    if (emailState && passwordState) {
+      login.disabled = false;
+      console.log('email && password valid');
+      // Add your code to submit the form or perform other actions here
+    } else {
+      login.disabled = true;
+      console.log('email && password invalid');
+    }
+  });
+</script>
+{% endblock %}
