@@ -1,0 +1,32 @@
+*{
+    text-decoration: none;
+}
+body{
+    width: 100vw;
+    overflow-x: hidden;
+}
+.combine{
+    display: grid;
+    grid-template-columns: 1fr 5fr;
+    grid-gap: 10px;
+}
+
+.charts{
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr;
+    grid-gap: 10px; 
+}
+::-webkit-scrollbar {
+    width: 0.5em;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    border-radius: 10px;
+  }
+   
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #6a563dae; 
+    border-radius: 10px;
+  }

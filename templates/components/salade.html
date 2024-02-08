@@ -1,0 +1,220 @@
+<div class="salade">
+  <div class="shadow-sm py-2 px-3 salade-1">
+    <div class="d-flex my-2 justify-content-between">
+      <h3 class="chart-title">Salade Thon</h3>
+      <select class="form-select shadow-none salade-ton">
+        <option selected value="week">Week</option>
+        <option value="month">Month</option>
+        <option value="all">All</option>
+      </select>
+    </div>
+    <div class="d-flex my-2 justify-content-between">
+      <canvas id="myChart0"></canvas>
+      <img src="../../static/utils/icons/stable.png" class="variation-ton" />
+    </div>
+  </div>
+  <div class="shadow-sm py-2 px-3 salade-1">
+    <div class="d-flex my-2 justify-content-between">
+      <h3 class="chart-title">Salade Poulet</h3>
+      <select class="form-select shadow-none salade-poulet">
+        <option selected value="week">Week</option>
+        <option value="month">Month</option>
+        <option value="all">All</option>
+      </select>
+    </div>
+    <canvas id="myChart1"></canvas>
+  </div>
+</div>
+
+<style>
+  .chart-title {
+    color: #6a563d;
+  }
+  .variation-ton {
+    height: 10vw;
+    padding: 0.5em 1em;
+    border: 2px solid #6a563d !important;
+    border-radius: 2em;
+  }
+
+  option:hover {
+    background-color: #6a563d;
+    color: #f1f1f1;
+  }
+
+  .salade {
+    background-color: white;
+    width: 80vw;
+    margin: 0 auto;
+    border-radius: 2em;
+    padding: 2em;
+    margin: 2em auto;
+  }
+
+  .salade-1 {
+    margin: 1em auto;
+    transition: background-image 0.5s ease-in-out;
+    border-radius: 1em;
+  }
+
+  canvas {
+    color: #6a563d !important;
+    border: 2px solid #6a563d !important;
+    border-radius: 2em;
+    width: 60vw !important;
+    height: 25vw !important;
+    padding: 0.5em 1em;
+    border: 1px solid #ccc;
+  }
+
+  .salade-ton,
+  .salade-poulet {
+    width: 100px;
+  }
+
+  .change {
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #6a563d;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  .salade-1:hover {
+    background-image: linear-gradient(120deg, #fff 0%, #f1f1f1 150%);
+  }
+</style>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+  let data = null;
+  let img = document.querySelector('.variation-ton');
+  let chartTon = null;
+  let chartPoulet = null;
+  const ton = document.querySelector('.salade-ton');
+  const poulet = document.querySelector('.salade-poulet');
+  const ctx0 = document.getElementById('myChart0');
+  const ctx1 = document.getElementById('myChart1');
+  const _url = 'http://127.0.0.1:5000/chart-data-salade';
+
+  const fetchData = async () => {
+    if (data === null) {
+      const response = await fetch(_url);
+      data = await response.json();
+    }
+  };
+
+  const createChart = (periode, ctx, column) => {
+    let localData;
+    if (periode == 'week') {
+      localData = {
+        x: data.map(d => d['Date']).slice(data.length - 5, data.length),
+        y: data.map(d => d[column]).slice(data.length - 5, data.length),
+      };
+    } else if (periode == 'month') {
+      localData = {
+        x: data.map(d => d['Date']).slice(data.length - 30, data.length),
+        y: data.map(d => d[column]).slice(data.length - 30, data.length),
+      };
+    } else {
+      localData = {
+        x: data.map(d => d['Date']),
+        y: data.map(d => d[column]),
+      };
+    }
+
+    return new Chart(ctx, {
+      type: 'line',
+      defaultFontColor: 'black',
+
+      data: {
+        labels: localData.x,
+        datasets: [
+          {
+            label: column + ' quantity',
+            labelColor: 'rgb(106,86,61)',
+            data: localData.y,
+            borderWidth: 1,
+            borderColor: 'rgb(106,86,61)',
+            backgroundColor: 'rgba(106,86,61, 0.2)',
+            fill: true,
+          },
+        ],
+      },
+      options: {
+        responsive: true,
+        animations: {
+          tension: {
+            duration: 2000,
+            easing: 'linear',
+            from: 0.5,
+            to: 0,
+            loop: true,
+          },
+        },
+        plugins: {
+          tooltip: {
+            backgroundColor: 'rgba(106,86,61, 0.2)',
+            titleColor: 'black',
+            bodyColor: 'black',
+            titleFont: {
+              size: 16,
+            },
+            bodyFont: {
+              size: 14,
+            },
+          },
+        },
+        interaction: {
+          mode: 'nearest',
+          axis: 'x',
+          intersect: false,
+        },
+        scales: {
+          x: {
+            title: {
+              display: true,
+              text: 'Date',
+            },
+            ticks: {
+              color: '#000',
+            },
+          },
+          y: {
+            stacked: true,
+            title: {
+              display: true,
+              text: 'Quantity',
+            },
+            ticks: {
+              color: '#000',
+            },
+          },
+        },
+      },
+    });
+  };
+  //intialize the chart and fetch data
+  const main = async () => {
+    await fetchData();
+    chartTon = createChart('week', ctx0, 'Salade Thon');
+    chartPoulet = createChart('week', ctx1, 'Salade Poulet');
+  };
+  main();
+  //events
+  ton.addEventListener('change', async e => {
+    if (chartTon) {
+      await chartTon.destroy();
+    }
+    createChart(e.target.value, ctx0, 'Salade Thon');
+  });
+  poulet.addEventListener('change', async e => {
+    if (chartPoulet) {
+      await chartPoulet.destroy();
+    }
+    createChart(e.target.value, ctx1, 'Salade Poulet', chartPoulet);
+  });
+</script>

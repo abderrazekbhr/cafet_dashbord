@@ -7,6 +7,8 @@ body{
     overflow-x: hidden;
     width: 100vw;
     background: #f1f1f1;
+    background: url("../utils/images/shared_background.jpg");
+    background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
 }
@@ -27,17 +29,22 @@ body{
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 100vw;
+    background-color: #fff;
     height: 100vh;
+    width: 90vw; 
+    margin: 5em auto;
+    border-radius: 2em;
 }
+
 .side-image{
     display: block;
     width: 60vw;
     height: 100vh;
-    border-top-right-radius: 1em;
-    border-bottom-right-radius: 1em;
-
+    padding: 2em;
+    border-radius: 4em;
 }
+
+
 .form-label{
     font-size: 1.1em ;
     color: #3a1d00;
@@ -47,6 +54,7 @@ body{
     display: grid;
     margin: 0em auto 1em auto;
     height: 175px;
+
     padding: 25px;
     background-color:#f1f1f1 ;
     border-radius: 50%;
@@ -65,12 +73,12 @@ h4 {
     font-weight: 600;
     font-size: 1.1em;
     border-radius: 0.5em;
-    padding: 0.5em 1em;
+    padding: 0.5em 1em 0;
     margin: 1em 0em;
     border: none;
     cursor: pointer;
 }
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 1000px) {
     .side-image{
         display: none;
     }
@@ -89,3 +97,32 @@ h4 {
     background: #3a1d00;
     color:#6A563D ;
   }
+  #email, #password {
+    border: 1px solid #cfcfcf;
+    border-radius: 0.5em;
+    padding: 0.5em 1em;
+    margin: 1em 0em;
+    transition: border 1s ease-in-out; 
+}
+
+#email:hover, #email:focus, #email:active, #password:hover, #password:focus, #password:active {
+    border: 1px solid #6A563D;
+    border-radius: 1em;
+}
+
+::-webkit-scrollbar {
+    width: 0.5em;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    border-radius: 10px;
+  }
+   
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #6a563dae; 
+    border-radius: 10px;
+  }
+  
+  

@@ -1,20 +1,23 @@
 {% extends './components/base.html' %} {% block content %}
 <div class="content">
-  <img src="../../static/utils/images/background.jpg" class="side-image" />
+  <img src="../../static/utils/images/image.jpg" class="side-image" />
   <form method="post" action="http://127.0.0.1:5000/" class="login-form">
-    <img src="../../static/utils/images/cafe.png" class="top-image" />
-    <h4>Welcome to the K-fet ENSEA dashboard</h4>
-    <div class="mb-3">
-      <label for="email" class="form-label">Email address</label>
-      <input type="email" class="form-control shadow-none" name="email" id="email" required />
+    <div class="left">
+      <img src="../../static/utils/images/cafe.png" class="top-image" />
+
     </div>
-    <div class="mb-3">
+    <h4>Welcome to the K-fet ENSEA dashboard</h4>
+    <div class="">
+      <label for="email" class="form-label">Email address</label>
+      <input type="email" class="form-control py-2  shadow-none " name="email" id="email" required />
+    </div>
+    <div class="">
       <label for="password" name="password" class="form-label">Password</label>
-      <input type="password" class="form-control shadow-none" id="password" name="password" required />
+      <input type="password" class="form-control py-2  shadow-none" id="password" name="password" required />
     </div>
 
-    <button type="submit" disabled style="background-color: #6a563d; color: #f1f1f1; font-size: 1.2em" class="btn shadow-none login-btn">
-      Submit
+    <button type="submit" disabled style="border-radius: 2em; background-color: #6a563d; color: #f1f1f1; font-size: 1.2em" class="btn shadow-none login-btn">
+      Login
     </button>
   </form>
 </div>
