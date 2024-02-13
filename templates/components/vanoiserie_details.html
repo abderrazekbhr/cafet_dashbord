@@ -1,0 +1,48 @@
+<div class="vanoiserie">
+  {% include 'components/head.html' %}
+  <div class="shadow-sm py-2 px-3 vanoiserie-1">
+    <div class="d-flex my-2 justify-content-between">
+      <h3 class="chart-title">Pain au chocolat</h3>
+      <select class="form-select shadow-none select-0">
+        <option selected value="week">Week</option>
+        <option value="month">Month</option>
+        <option value="all">All</option>
+      </select>
+    </div>
+    <div class="d-flex my-2 justify-content-between">
+      <canvas id="myChart0"></canvas>
+    </div>
+  </div>
+  <div class="shadow-sm py-2 px-3 vanoiserie-1">
+    <div class="d-flex my-2 justify-content-between">
+      <h3 class="chart-title">Croissant</h3>
+      <select class="form-select shadow-none select-1">
+        <option selected value="week">Week</option>
+        <option value="month">Month</option>
+        <option value="all">All</option>
+      </select>
+    </div>
+    <div class="d-flex my-2 justify-content-between">
+      <canvas id="myChart1"></canvas>
+    </div>
+  </div>
+  <div class="shadow-sm py-2 px-3 vanoiserie-1">
+    <div class="d-flex my-2 justify-content-between">
+      <h3 class="chart-title">Pains suisses</h3>
+      <select class="form-select shadow-none select-2">
+        <option selected value="week">Week</option>
+        <option value="month">Month</option>
+        <option value="all">All</option>
+      </select>
+    </div>
+    <div class="d-flex my-2 justify-content-between">
+      <canvas id="myChart2"></canvas>
+    </div>
+  </div>
+  
+  
+  <link rel="stylesheet" href="../../static/css/vanoiserie.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="../../static/js/vanoiserie.js"></script>
+    </script>
+  

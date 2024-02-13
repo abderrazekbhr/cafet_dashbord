@@ -8,14 +8,8 @@ body{
 .combine{
     display: grid;
     grid-template-columns: 1fr 5fr;
-    grid-gap: 10px;
 }
 
-.charts{
-    display: grid;
-    grid-template-rows: 1fr 1fr 1fr;
-    grid-gap: 10px; 
-}
 ::-webkit-scrollbar {
     width: 0.5em;
   }

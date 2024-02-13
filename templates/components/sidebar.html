@@ -1,3 +1,4 @@
+<link rel="stylesheet" href="../../static/css/sidebar.css">
 <div class="side-bar">
     <div class=" content">
       <div class="d-flex flex-column align-items-center align-items-sm-start px-0 pt-2 text-white min-vh-100">
@@ -10,7 +11,7 @@
         <hr>
         <ul class="nav px-3 nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
           <li class="li-item home">
-            <a href="http://127.0.0.1:5000/main" class="url">
+            <a href="http://127.0.0.1:5000/main-salade" class="url">
               <span class="ms-1 d-none d-sm-inline">Home</span>
             </a>
           </li>
@@ -49,11 +50,16 @@
           </ul>
         
         </div>
+      </div>
+    </div>
+</div>
+
+
 
 <!-- Modal -->
 <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
   <div class="modal-dialog">
-    <div class="modal-content">
+    <form action="http://127.0.0.1:5000/update"  method="post" class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="staticBackdropLabel">Update your data </h5>
         <button type="button" class="btn-close shadow-none" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -69,134 +75,8 @@
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="update">Update</button>
+        <button type="submit"  class="update">Update</button>
       </div>
-    </div>
+    </form>
   </div>
 </div>
-
-
-
-      </div>
-    </div>
-</div>
-<style>
-.content{
-  background-color:#6A563D ;
-  height: 100vh;
-  position: relative;
-}
-.side-bar{
-  display: grid;
-  width: 220px;
-}
-.url{
-  position: relative;
-  color: #f1f1f1;
-  margin: 0.25em 0.5em;
-  height: 100%;
-  width: 100%;
-  padding: 0.2em 0;
-  text-decoration: none;
-}
-.update{
-    background-color: #6A563D;
-    box-shadow: none;
-    color: #fff;
-    font-weight: 600;
-    font-size: 1.1em;
-    border-radius: 0.5em;
-    padding: 0.5em 1em ;
-    margin: 1em 0em;
-    border: none;
-    cursor: pointer;
-    transition:box-shadow 0.5s ease-in-out ;
-}
-.update:focus{
-    box-shadow:5px 5px 7px gray ;
-}
-
-.li-item{
-  display: flex;
-  align-items: center;
-  color: #f1f1f1;
-  position: relative;
-  padding: 0.5em 0;
-  width: 100%;
-  text-decoration: none;
-  transition:background-color 0.5s ease-in-out, padding 0.5s ease-in-out, color 0.5s ease-in-out, border-radius 0.5s ease-in-out;
-}
-
-.home::before,.predict::before,.orders::before{
-  position: relative;
-  opacity: 0;
-  width: 0;
-  transition: opacity 0.5s ease-in-out,width 0.5s ease-in-out;
-
-}
-
-.li-item:hover ,.url:hover{
-  display: flex;
-  color: #6A563D;
-  text-decoration: none;
-  border-radius: 2em;
-}
-
-.li-item:hover {
-  background-color: #faf2e9;
-  padding-left: 1em ;
-  opacity: 1  ;
-
-}
-.modal-title{
-  color: #6A563D;
-}
-.dropdown-item:hover{
-  background-color: #faf2e9;
-  color: #6A563D;
-}
-.dropdown{
-  cursor: pointer;
-  position: absolute;
-  bottom: 0;
-}
-hr{
-  font-weight: 2px;
-  width: 100%;
-  color: #f1f1f1;
-
-}
-.top{
-  display: flex;
-  align-items: center;
-  width: 100%;
-}
-.top img{
-  background-color: #faf2e9;
-  border-radius: 20px;
-  padding: 5px;
-}
-.user-icon span
-{
-  color: #6A563D;
-
-}
-#menu{
-  width: 100%;
-  height: 25vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-}
-.user-icon{
-  background-color: #faf2e9;
-  border-radius: 40px;
-  padding: 10px 20px;
-}
-.user-icon::after{
-  color: #6A563D;
-  margin-top:0.4em; ;
-}
-
-
-</style>

@@ -10,3 +10,8 @@ def test_login(email,password):
     if(data["email"]==email and data["password"]==password):
         return True
     return False
+
+def update_data(data):
+    with open('static/utils/data.json', 'w') as f:
+        json.dump(data, f)
+    return True

@@ -1,0 +1,34 @@
+<div class="salade">
+  {% include 'components/head.html' %}
+
+  <div class="shadow-sm py-2 px-3 salade-1">
+    <div class="d-flex my-2 justify-content-between">
+      <h3 class="chart-title">Salade Thon</h3>
+      <select class="form-select shadow-none salade-ton">
+        <option selected value="week">Week</option>
+        <option value="month">Month</option>
+        <option value="all">All</option>
+      </select>
+    </div>
+    <div class="d-flex my-2 justify-content-between">
+      <canvas id="myChart0"></canvas>
+      <!-- <img src="../../static/utils/icons/stable.png" class="variation-ton" /> -->
+    </div>
+  </div>
+  <div class="shadow-sm py-2 px-3 salade-1">
+    <div class="d-flex my-2 justify-content-between">
+      <h3 class="chart-title">Salade Poulet</h3>
+      <select class="form-select shadow-none salade-poulet">
+        <option selected value="week">Week</option>
+        <option value="month">Month</option>
+        <option value="all">All</option>
+      </select>
+    </div>
+    <canvas id="myChart1"></canvas>
+  </div>
+</div>
+
+<link rel="stylesheet" href="../../static/css/salade.css">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="../../static/js/salade.js"></script>
+  </script>
