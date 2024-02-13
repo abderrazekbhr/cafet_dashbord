@@ -7,7 +7,7 @@ app =Flask(__name__)
 app.config["SESSION_PERMANENT"] = False
 app.config["SESSION_TYPE"] = "filesystem"
 Session(app)
-
+@app.route('/', defaults={'path': ''})
 @app.route('/',methods=['GET','POST'])
 def login():
     if(session.get("token")=="connected"):
@@ -24,6 +24,7 @@ def login():
 
 @app.route('/main-salade',methods=['GET'])
 def main_salade():
+    print(session.get("token"))
     if(session.get("token")=="connected"):
         return render_template('/pages/salade.html',css_file="main.css",js_file="main.js")
     return redirect("/", code=302) 
@@ -44,19 +45,16 @@ def main_vanoiserie():
 @app.route('/logout',methods=['GET'])
 def logout():
     session.clear()
+    print(session.get("token"))
     return redirect("/", code=302)
 
 @app.route('/update',methods=['POST'])
 def update():
-    email=request.args.email
-    password=request.args.password
-    data={
-        "email":email,
-        "password":password
-    }
+    data=request.json
     update_data(data)
     session.clear()
-    return redirect("/", code=302)
+    print(session.get("token"))
+    render_template('/pages/login.html',css_file="login.css",js_file="login.js")
 
 
 @app.route('/chart-data-salade',methods=['GET'])
@@ -71,6 +69,9 @@ def chart_sandwich():
 def chart_vanoiserie():
     return get_data_by_column(["Date","Pain au chocolat","Croissant","Pains suisses"]) .to_json(orient='records') 
  
+@app.errorhandler(404) 
+def default_url(e):
+    return redirect("/", code=302) 
  
 if __name__ == '__main__':
     app.run(debug=True)
