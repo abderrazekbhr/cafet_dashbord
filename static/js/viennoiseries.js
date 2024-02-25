@@ -11,7 +11,7 @@ const select2 = document.querySelector('.select-2');
 const ctx0 = document.getElementById('myChart0');
 const ctx1 = document.getElementById('myChart1');
 const ctx2 = document.getElementById('myChart2');
-const _url = 'http://127.0.0.1:5000/chart-data-vanoiserie';
+const _url = 'http://127.0.0.1:5000/chart-data-viennoiseries';
 
 const fetchData = async () => {
   if (data === null) {

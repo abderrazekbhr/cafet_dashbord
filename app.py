@@ -35,10 +35,10 @@ def main_sandwich():
         return render_template('/pages/sandwich.html',css_file="main.css",js_file="main.js")
     return redirect("/", code=302) 
 
-@app.route('/main-vanoiserie',methods=['GET'])
-def main_vanoiserie():
+@app.route('/main-viennoiseries',methods=['GET'])
+def main_viennoiseries():
     if(session.get("token")=="connected"):
-        return render_template('/pages/vanoiserie.html',css_file="main.css",js_file="main.js")
+        return render_template('/pages/viennoiseries.html',css_file="main.css",js_file="main.js")
     return redirect("/", code=302) 
 
     
@@ -65,8 +65,8 @@ def chart_salade():
 def chart_sandwich():
     return get_data_by_column(["Date","Sandwiches poulet crudités","Sandwiches thon cruditès","Sandwiches végétarien","Sandwiches poulet mexicain","Sandwiches chèvre miel crudités","Sandwiches poulet curry","Sandwiches saumon","Panini 4 fromages","Panini poulet Kebab"]) .to_json(orient='records') 
  
-@app.route('/chart-data-vanoiserie',methods=['GET'])
-def chart_vanoiserie():
+@app.route('/chart-data-viennoiseries',methods=['GET'])
+def chart_viennoiseries():
     return get_data_by_column(["Date","Pain au chocolat","Croissant","Pains suisses"]) .to_json(orient='records') 
  
 @app.errorhandler(404) 

@@ -1,6 +1,6 @@
 const headSalade= document.querySelector('.salade-head');
 const headSandwich= document.querySelector('.sandwich-head');
-const headVanoiserie= document.querySelector('.vanoiserie-head');
+const headviennoiseries= document.querySelector('.viennoiseries-head');
 
 headSalade.addEventListener('click', () => {
     window.location.href = 'http://127.0.0.1:5000/main-salade';
@@ -8,6 +8,6 @@ headSalade.addEventListener('click', () => {
 headSandwich.addEventListener('click', () => {
     window.location.href = 'http://127.0.0.1:5000/main-sandwich';
 });
-headVanoiserie.addEventListener('click', () => {
-    window.location.href = 'http://127.0.0.1:5000/main-vanoiserie';
+headviennoiseries.addEventListener('click', () => {
+    window.location.href = 'http://127.0.0.1:5000/main-viennoiseries';
 });

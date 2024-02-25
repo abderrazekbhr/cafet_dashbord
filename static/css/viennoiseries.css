@@ -7,7 +7,7 @@
     color: #f1f1f1;
   }
 
-  .vanoiserie {
+  .viennoiseries {
     background-color: white;
     width: 80vw;
     height: 100vh;
@@ -17,7 +17,7 @@
     padding: 2em;
   }
 
-  .vanoiserie-1 {
+  .viennoiseries-1 {
     margin: 1em auto;
     transition: background-image 0.5s ease-in-out;
     border-radius: 1em;
@@ -46,6 +46,6 @@
     cursor: pointer;
   }
 
-  .vanoiserie-1:hover {
+  .viennoiseries-1:hover {
     background-image: linear-gradient(120deg, #fff 0%, #f1f1f1 150%);
   }
