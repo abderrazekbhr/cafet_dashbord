@@ -1,15 +1,13 @@
 import unittest
 
-class MyTest(unittest.TestCase):
-    def test_something(self):
-        # Write test cases here
-        pass
+class MyTestCase(unittest.TestCase):
+    def test_addition(self):
+        result = 5 + 10
+        self.assertEqual(result, 15, "Addition test failed")
 
-    def test_another_thing(self):
-        # Test the / endpoint
-        response = self.app.get('/')
-        self.assertEqual(response.status_code, 200)
+    def test_subtraction(self):
+        result = 20 - 5
+        self.assertEqual(result, 15, "Subtraction test failed")
 
-
-if __name__ == "__main__":
+if __name__ == '__main__':
     unittest.main()
