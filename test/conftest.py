@@ -6,8 +6,10 @@ class MyTest(unittest.TestCase):
         pass
 
     def test_another_thing(self):
-        # Write more test cases here
-        pass
+        # Test the / endpoint
+        response = self.app.get('/')
+        self.assertEqual(response.status_code, 200)
+
 
 if __name__ == "__main__":
     unittest.main()
