@@ -41,7 +41,24 @@ def main_viennoiseries():
         return render_template('/pages/viennoiseries.html',css_file="main.css",js_file="main.js")
     return redirect("/", code=302) 
 
-    
+
+@app.route('/main-orders-salade',methods=['GET'])
+def main_orders_salade():
+    if(session.get("token")=="connected"):
+        return render_template('/pages/saladeOrders.html',css_file="main.css",js_file="main.js")
+    return redirect("/", code=302)
+@app.route('/main-orders-sandwich',methods=['GET'])
+def main_orders_sandwich():
+    if(session.get("token")=="connected"):
+        return render_template('/pages/sandwichOrders.html',css_file="main.css",js_file="main.js")
+    return redirect("/", code=302)
+@app.route('/main-orders-viennoiseries',methods=['GET'])
+def main_orders_viennoiseries():
+    if(session.get("token")=="connected"):
+        return render_template('/pages/viennoiseriesOrders.html',css_file="main.css",js_file="main.js")
+    return redirect("/", code=302) 
+
+
 @app.route('/logout',methods=['GET'])
 def logout():
     session.clear()
@@ -68,7 +85,39 @@ def chart_sandwich():
 @app.route('/chart-data-viennoiseries',methods=['GET'])
 def chart_viennoiseries():
     return get_data_by_column(["Date","Pain au chocolat","Croissant","Pains suisses"]) .to_json(orient='records') 
+
+
+@app.route('/get-saladeOrders-data', methods=['GET'])
+def get_saladeOrders_data():
+    return get_data_by_column([
+        "Date",
+        "Salade Thon",
+        "Salade Poulet"
+    ]).to_json(orient='records')
+@app.route('/get-sandwichOrders-data', methods=['GET'])
+def get_sandwichOrders_data():
+    return get_data_by_column([
+        "Date",
+        "Sandwiches poulet crudités",
+        "Sandwiches thon cruditès",
+        "Sandwiches végétarien",
+        "Sandwiches poulet mexicain",
+        "Sandwiches chèvre miel crudités",
+        "Sandwiches poulet curry",
+        "Sandwiches saumon",
+        "Panini 4 fromages",
+        "Panini poulet Kebab",
+    ]).to_json(orient='records')
+@app.route('/get-viennoiseriesOrders-data', methods=['GET'])
+def get_viennoiseriesOrders_data():
+    return get_data_by_column([
+        "Date",
+        "Pain au chocolat",
+        "Croissant",
+        "Pains suisses",
+    ]).to_json(orient='records')
  
+
 @app.errorhandler(404) 
 def default_url(e):
     return redirect("/", code=302) 
