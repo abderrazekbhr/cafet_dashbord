@@ -56,15 +56,7 @@ const createChart = (periode, ctx, column, chart) => {
     },
     options: {
       responsive: true,
-      animations: {
-        tension: {
-          duration: 2000,
-          easing: 'linear',
-          from: 0.5,
-          to: 0,
-          loop: true,
-        },
-      },
+      
       plugins: {
         tooltip: {
           backgroundColor: 'rgba(106,86,61, 0.2)',

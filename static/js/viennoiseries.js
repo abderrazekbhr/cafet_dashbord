@@ -61,15 +61,7 @@ const createChart = (periode, ctx, column, chart) => {
     },
     options: {
       responsive: true,
-      animations: {
-        tension: {
-          duration: 2000,
-          easing: 'linear',
-          from: 0.5,
-          to: 0,
-          loop: true,
-        },
-      },
+
       plugins: {
         tooltip: {
           backgroundColor: 'rgba(106,86,61, 0.2)',
@@ -114,23 +106,21 @@ const createChart = (periode, ctx, column, chart) => {
 };
 //intialize the chart and fetch data
 
-
 const main = async () => {
   await fetchData();
-  chart0 = createChart("week", ctx0, "Pain au chocolat", chart0);
-  chart1 = createChart("week", ctx1, "Croissant", chart1);
-  chart2 = createChart("week", ctx2, "Pains suisses", chart2);
-  
+  chart0 = createChart('week', ctx0, 'Pain au chocolat', chart0);
+  chart1 = createChart('week', ctx1, 'Croissant', chart1);
+  chart2 = createChart('week', ctx2, 'Pains suisses', chart2);
 };
 main();
 
 //events
-select0.addEventListener("change", e => {
-  chart0 = createChart(e.target.value, ctx0, "Pain au chocolat", chart0);
+select0.addEventListener('change', e => {
+  chart0 = createChart(e.target.value, ctx0, 'Pain au chocolat', chart0);
 });
-select1.addEventListener("change", async e => {
-  chart1 = createChart(e.target.value, ctx1, "Croissant", chart1);
+select1.addEventListener('change', async e => {
+  chart1 = createChart(e.target.value, ctx1, 'Croissant', chart1);
 });
-select2.addEventListener("change", e => {
-  chart2 = createChart(e.target.value, ctx2, "Pains suisses", chart2);
+select2.addEventListener('change', e => {
+  chart2 = createChart(e.target.value, ctx2, 'Pains suisses', chart2);
 });

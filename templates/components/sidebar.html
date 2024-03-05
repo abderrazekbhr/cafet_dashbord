@@ -1,67 +1,70 @@
-<link rel="stylesheet" href="../../static/css/sidebar.css">
+<link rel="stylesheet" href="../../static/css/sidebar.css" />
 <div class="side-bar">
-    <div class=" content">
-      <div class="d-flex flex-column align-items-center align-items-sm-start px-0 pt-2 text-white min-vh-100">
-        <div class="px-3 top">
-          <img src="../../static/utils/images/cafe.png" width="40" height="40">
-          <h3 class="m-3 d-none d-sm-inline">
-            K-Fet
-          </h3>
-        </div>
-        <hr>
-        <ul class="nav px-3 nav-pills flex-column flex-nowrap mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
-          <li class="li-item home">
-            <a href="http://127.0.0.1:5000/main-salade" class="url">
-              <span class="ms-1 d-none d-sm-inline">Home</span>
-            </a>
-          </li>
-          <li class="li-item predict"> 
-            <a href="http://127.0.0.1:5000/main" data-bs-toggle="collapse" class="url">
-              <span class="ms-1 d-none d-sm-inline">Predict</span>
-            </a>
-          </li>
-          <li class="li-item orders">
-            <a href="http://127.0.0.1:5000/main-orders-salade" class="url">
-               <span class="ms-1 d-none d-sm-inline">Orders</span></a
-            >
-          </li>
-        </ul> 
-          <div class="dropdown pb-4">
-          <hr>
-          <a
-            class="d-flex align-items-center text-white  dropdown-toggle user-icon"
-            id="dropdownUser1"
-            data-bs-toggle="dropdown"
-            aria-expanded="false"
-          >
-            <img src="../../static/utils/icons/eleve.png" alt="user" width="24" height="24" class="rounded-circle " />
-            <span class="d-none d-sm-inline mx-1">Admin</span>
+  <div class="content">
+    <div class="d-flex flex-column align-items-center align-items-sm-start px-0 pt-2 text-white min-vh-100">
+      <div class="px-3 top">
+        <img src="../../static/utils/images/cafe.png" width="40" height="40" />
+        <h3 class="m-3 d-none d-sm-inline">K-Fet</h3>
+      </div>
+      <hr />
+      <ul class="nav px-3 nav-pills flex-column flex-nowrap mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
+        <li class="li-item home">
+          <a href="http://127.0.0.1:5000/main-salade" class="url">
+            <span class="ms-1 d-none d-sm-inline">Home</span>
           </a>
-          <ul class="dropdown-menu  text-small shadow">
-            <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Settings</a></li>
-            <li>
-              <hr class="dropdown-divider" />
-            </li>
-            <li><a class="dropdown-item update-model" >Update modale</a></li>
-            <li>
-              <hr class="dropdown-divider" />
-            </li>
-            <li><a class="dropdown-item" href="http://127.0.0.1:5000/logout">Sign out</a></li>
-          </ul>
-        
-        </div>
+        </li>
+        <li class="li-item predict">
+          <a href="http://127.0.0.1:5000/main" data-bs-toggle="collapse" class="url">
+            <span class="ms-1 d-none d-sm-inline">Predict</span>
+          </a>
+        </li>
+        <li class="li-item orders">
+          <a href="http://127.0.0.1:5000/main-orders-salade" class="url"> <span class="ms-1 d-none d-sm-inline">Orders</span></a>
+        </li>
+      </ul>
+      <div class="dropdown pb-4">
+        <hr />
+        <a
+          class="d-flex align-items-center text-white dropdown-toggle user-icon"
+          id="dropdownUser1"
+          data-bs-toggle="dropdown"
+          aria-expanded="false"
+        >
+          <img src="../../static/utils/icons/eleve.png" alt="user" width="24" height="24" class="rounded-circle" />
+          <span class="d-none d-sm-inline mx-1">Admin</span>
+        </a>
+        <ul class="dropdown-menu text-small shadow">
+          <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Settings</a></li>
+          <hr class="dropdown-divider" />
+          <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#correlation">Correlation</a></li>
+          <li>
+            <hr class="dropdown-divider" />
+          </li>
+          <li><a class="dropdown-item update-model">Update modal</a></li>
+          <li>
+            <hr class="dropdown-divider" />
+          </li>
+          <li><a class="dropdown-item" href="http://127.0.0.1:5000/logout">Sign out</a></li>
+        </ul>
       </div>
     </div>
+  </div>
 </div>
 
-
-
 <!-- Modal -->
-<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+<div
+  class="modal fade"
+  id="staticBackdrop"
+  data-bs-backdrop="static"
+  data-bs-keyboard="false"
+  tabindex="-1"
+  aria-labelledby="staticBackdropLabel"
+  aria-hidden="true"
+>
   <div class="modal-dialog">
-    <form action="http://127.0.0.1:5000/update"  method="post" class="modal-content">
+    <form action="http://127.0.0.1:5000/update" method="post" class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="staticBackdropLabel">Update your data </h5>
+        <h5 class="modal-title" id="staticBackdropLabel">Update your data</h5>
         <button type="button" class="btn-close shadow-none" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
@@ -75,8 +78,56 @@
         </div>
       </div>
       <div class="modal-footer">
-        <input type="submit" value="Update" class="update">
+        <input type="submit" value="Update" class="update" />
       </div>
     </form>
+  </div>
+</div>
+
+<div
+  class="modal fade"
+  id="correlation"
+  data-bs-backdrop="static"
+  data-bs-keyboard="false"
+  tabindex="1"
+  aria-labelledby="correlationLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-header">
+      <h5 class="modal-title" id="correlationLabel">Correlation</h5>
+      <button type="button" class="btn-close shadow-none" data-bs-dismiss="modal" aria-label="Close"></button>
+    </div>
+    <div class="modal-body">
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">First</th>
+            <th scope="col">Last</th>
+            <th scope="col">Handle</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">1</th>
+            <td>Mark</td>
+            <td>Otto</td>
+            <td>@mdo</td>
+          </tr>
+          <tr>
+            <th scope="row">2</th>
+            <td>Jacob</td>
+            <td>Thornton</td>
+            <td>@fat</td>
+          </tr>
+          <tr>
+            <th scope="row">3</th>
+            <td colspan="2">Larry the Bird</td>
+            <td>@twitter</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
 </div>
