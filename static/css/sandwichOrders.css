@@ -2,20 +2,17 @@ h1 {
     text-align: center;
 }
 
-.container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 100vh; /* Utilise toute la hauteur de la fenêtre */
-}
+
 
 .table-container {
     overflow-x: auto;
     max-height: 200px; /* Limite de 5 lignes pour le défilement vertical */
-   
+    scrollbar-width: thin;
+    scrollbar-color: #6a563d;
     max-width: 90%; /* Limite la largeur maximale du conteneur */
-    margin-top: 50px; /* Ajoute de l'espace au-dessus du tableau */
+    margin-top: 30px; /* Ajoute de l'espace au-dessus du tableau */
+    margin-bottom: 20px;
+    margin-left: 50px;
 }
 
 table {
@@ -25,6 +22,7 @@ table {
 }
 
 th, td {
+    color: black; /* Couleur du texte */
     border: 1px solid #ddd;
     padding: 8px;
     text-align: left;
