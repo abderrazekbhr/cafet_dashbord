@@ -1,0 +1,57 @@
+.salade {
+    background-color: white;
+    width: 80vw;
+    height: 100vh;
+    overflow-y: scroll;
+    margin: 0 auto;
+    border-radius: 2em;
+    padding: 2em;
+    color: black; /* Ajout de la couleur du texte */
+}
+.salade form input[type="text"],
+.salade form input[type="date"] {
+    color: black; /* Couleur du texte pour les inputs de type texte et date */
+}
+
+.salade form .form-label {
+    color: black; /* Couleur du texte pour les labels */
+}
+
+.salade form .select-arrow {
+    color: black; /* Couleur du texte pour les flèches de sélection */
+}
+.salade div {
+    margin-top: 7px; /* Espace au-dessus */
+    margin-bottom: 7px; /* Espace en-dessous */
+}
+
+.salade div {
+    font-weight: bold; /* Texte en gras */
+}
+
+.mask-custom {
+    background: #6a563d81;
+    border-radius: 2em;
+    backdrop-filter: blur(25px);
+    border: 2px solid rgba(255, 255, 255, 0.05);
+    background-clip: padding-box;
+    box-shadow: 10px 10px 10px rgba(46, 54, 68, 0.03);
+}
+
+.btn-add-row {
+    background-color: #6a563d;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin-top: 20px;
+}
+
+.btn-add-row:hover {
+    background-color: #f1f1f1;
+}

@@ -2,20 +2,17 @@ h1 {
     text-align: center;
 }
 
-.container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 100vh; /* Utilise toute la hauteur de la fenêtre */
-}
+
 
 .table-container {
     overflow-x: auto;
     max-height: 200px; /* Limite de 5 lignes pour le défilement vertical */
-   
+    scrollbar-width: thin;
+    scrollbar-color: #6a563d;
     max-width: 90%; /* Limite la largeur maximale du conteneur */
-    margin-top: 50px; /* Ajoute de l'espace au-dessus du tableau */
+    margin-top: 30px; /* Ajoute de l'espace au-dessus du tableau */
+    margin-bottom: 20px;
+    margin-left: 50px;
 }
 
 table {
@@ -25,18 +22,26 @@ table {
 }
 
 th, td {
+    color: black; /* Couleur du texte */
     border: 1px solid #ddd;
     padding: 8px;
     text-align: left;
     white-space: nowrap; /* Empêche le texte de se casser à la ligne */
 }
+th {
+    background-color: #6a563d81; /* Couleur de fond pour les cellules du header */
+    color: black; /* Couleur du texte */
+}
 
 thead th {
+    position: -webkit-sticky;
     position: sticky;
     top: 0;
-    z-index: 1; /* Assure que les en-têtes restent au-dessus du contenu du tableau */
-    background-color: #f2f2f200; /* Couleur de fond des en-têtes */
+    background-color: #6a563d; /* Couleur de fond pour les cellules du header */
+    color: black; /* Couleur du texte */
+    z-index: 2; /* Assure que les cellules du header restent au-dessus des cellules du tableau */
 }
+
 
 tr:nth-child(even) {
     background-color: #f2f2f2;
