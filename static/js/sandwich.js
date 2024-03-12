@@ -43,12 +43,12 @@ const createChart = (periode, ctx, column, chart) => {
     console.log('destroying');
     chart.destroy();
   }
-  if (periode == 'week') {
+  if (periode == 'semaine') {
     localData = {
       x: data.map(d => d['Date']).slice(data.length - 5, data.length),
       y: data.map(d => d[column]).slice(data.length - 5, data.length),
     };
-  } else if (periode == 'month') {
+  } else if (periode == 'mois') {
     localData = {
       x: data.map(d => d['Date']).slice(data.length - 30, data.length),
       y: data.map(d => d[column]).slice(data.length - 30, data.length),
@@ -130,15 +130,15 @@ const createChart = (periode, ctx, column, chart) => {
 //intialize the chart and fetch data
 const main = async () => {
   await fetchData();
-  chart0 = createChart('week', ctx0, 'Sandwiches poulet crudités', chart0);
-  chart1 = createChart('week', ctx1, 'Sandwiches thon cruditès', chart1);
-  chart2 = createChart('week', ctx2, 'Sandwiches végétarien', chart2);
-  chart3 = createChart('week', ctx3, 'Sandwiches poulet mexicain', chart3);
-  chart4 = createChart('week', ctx4, 'Sandwiches chèvre miel crudités', chart4);
-  chart5 = createChart('week', ctx5, 'Sandwiches poulet curry', chart5);
-  chart6 = createChart('week', ctx6, 'Sandwiches saumon', chart6);
-  chart7 = createChart('week', ctx7, 'Panini 4 fromages', chart7);
-  chart8 = createChart('week', ctx8, 'Panini poulet Kebab', chart8);
+  chart0 = createChart('semaine', ctx0, 'Sandwiches poulet crudités', chart0);
+  chart1 = createChart('semaine', ctx1, 'Sandwiches thon cruditès', chart1);
+  chart2 = createChart('semaine', ctx2, 'Sandwiches végétarien', chart2);
+  chart3 = createChart('semaine', ctx3, 'Sandwiches poulet mexicain', chart3);
+  chart4 = createChart('semaine', ctx4, 'Sandwiches chèvre miel crudités', chart4);
+  chart5 = createChart('semaine', ctx5, 'Sandwiches poulet curry', chart5);
+  chart6 = createChart('semaine', ctx6, 'Sandwiches saumon', chart6);
+  chart7 = createChart('semaine', ctx7, 'Panini 4 fromages', chart7);
+  chart8 = createChart('semaine', ctx8, 'Panini poulet Kebab', chart8);
 };
 main();
 

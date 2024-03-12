@@ -4,6 +4,15 @@ import csv
 from classes_and_functions.functions.login_test import test_login,update_data
 from classes_and_functions.functions.read_data_csv import *
 
+import pickle
+import numpy as np
+import pandas as pd
+
+# Load the trained models
+knn = pickle.load(open("classes_and_functions/pkl/knn.pkl", "rb"))
+svr = pickle.load(open("classes_and_functions/pkl/svr.pkl", "rb"))
+lasso = pickle.load(open("classes_and_functions/pkl/lasso.pkl", "rb"))
+
 app =Flask(__name__)
 app.config["SESSION_PERMANENT"] = False
 app.config["SESSION_TYPE"] = "filesystem"
@@ -64,6 +73,30 @@ def main_orders_add():
         return render_template('/pages/addOrders.html',css_file="main.css",js_file="main.js")
     return redirect("/", code=302) 
 
+@app.route('/predict', methods=['GET','POST'])
+def predict():
+    if session.get("token") == "connected":
+        if request.method == 'POST':
+            model_name = request.form['model']
+            lundi = float(request.form['lundi'])
+            mardi = float(request.form['mardi'])
+            mercredi = float(request.form['mercredi'])
+            jeudi = float(request.form['jeudi'])
+            vendredi = float(request.form['vendredi'])
+
+            features = np.array([[lundi], [mardi], [mercredi], [jeudi], [vendredi]])
+
+            if model_name == 'knn':
+                prediction = knn.predict(features)
+            elif model_name == 'svr':
+                prediction = svr.predict(features)
+            elif model_name == 'lasso':
+                prediction = lasso.predict(features)
+            else:
+                return "Invalid model selected"
+            return render_template('/pages/ml.html', predictions={model_name: prediction.tolist()},css_file="main.css", js_file="main.js")
+        return render_template('/pages/ml.html', css_file="main.css", js_file="main.js")
+    return redirect("/", code=302)
 
 @app.route('/logout',methods=['GET'])
 def logout():
