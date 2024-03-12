@@ -30,10 +30,14 @@
 }
 
 .mask-custom {
-    background: #6a563daa;
+    display: grid;
+    margin: auto;
+    background: #f5f5f5;
+    box-shadow:2px 4px 5px #6a563d;
+    width: 50vw;
     border-radius: 2em;
     backdrop-filter: blur(25px);
-    border: 2px solid rgba(255, 255, 255, 0.05);
+    /* border: 2px solid rgba(255, 255, 255, 0.05); */
     background-clip: padding-box;
     box-shadow: 10px 10px 10px rgba(46, 54, 68, 0.03);
 }
@@ -54,4 +58,15 @@
 
 .btn-add-row:hover {
     background-color: #f1f1f1;
+}
+
+.sub-title{
+    color: #6a563d;
+    font-size: 1.2em;
+    font-weight: bold;
+}
+.title{
+    color: #6a563d;
+    font-weight: bold;
+
 }
