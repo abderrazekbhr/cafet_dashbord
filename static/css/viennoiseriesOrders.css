@@ -7,8 +7,6 @@ h1 {
 .table-container {
     overflow-x: auto;
     max-height: 200px; /* Limite de 5 lignes pour le défilement vertical */
-    scrollbar-width: thin;
-    scrollbar-color: #6a563d;
     max-width: 90%; /* Limite la largeur maximale du conteneur */
     margin-top: 30px; /* Ajoute de l'espace au-dessus du tableau */
     margin-bottom: 20px;
@@ -18,7 +16,6 @@ h1 {
 table {
     width: auto; /* Ajuste la largeur à son contenu */
     max-width: 100%; /* Limite la largeur du tableau à 100% du conteneur */
-    border-collapse: collapse;
 }
 
 th, td {
@@ -28,20 +25,19 @@ th, td {
     text-align: left;
     white-space: nowrap; /* Empêche le texte de se casser à la ligne */
 }
-th {
-    background-color: #6a563d81; /* Couleur de fond pour les cellules du header */
-    color: black; /* Couleur du texte */
+thead{
+    border: #f1f1f1;
 }
+
 
 thead th {
-    position: -webkit-sticky;
     position: sticky;
     top: 0;
-    background-color: #6a563d; /* Couleur de fond pour les cellules du header */
-    color: black; /* Couleur du texte */
-    z-index: 2; /* Assure que les cellules du header restent au-dessus des cellules du tableau */
+    z-index: 1; /* Assure que les en-têtes restent au-dessus du contenu du tableau */
+    background-color: #f2f2f2 !important;
+    border: none;
+     /* Couleur de fond des en-têtes */
 }
-
 
 tr:nth-child(even) {
     background-color: #f2f2f2;
@@ -67,7 +63,7 @@ tr:nth-child(even) {
 
 
   .mask-custom {
-    background: #6a563daa;
+    background: #f5f5f5;
     border-radius: 2em;
     backdrop-filter: blur(25px);
     border: 2px solid rgba(255, 255, 255, 0.05);
@@ -75,21 +71,13 @@ tr:nth-child(even) {
     box-shadow: 10px 10px 10px rgba(46, 54, 68, 0.03);
   }
 
+
  
-  .btn-add-row {
-    background-color:#6a563d; /* Couleur de fond */
-    color: white; /* Couleur du texte */
-    padding: 10px 20px; /* Marge intérieure */
-    border: none; /* Supprime la bordure */
-    border-radius: 20px; /* Bordure arrondie */
-    cursor: pointer; /* Curseur de souris */
-    text-align: center; /* Alignement du texte */
-    text-decoration: none; /* Supprime les décorations de texte */
-    display: inline-block; /* Affichage en ligne */
-    font-size: 16px; /* Taille de la police */
-    margin-top: 20px; /* Marge supérieure */
-}
 
 .btn-add-row:hover {
     background-color:  #f1f1f1; /* Couleur de fond au survol */
 }
+
+ .tbody{
+    position: sticky;
+ }

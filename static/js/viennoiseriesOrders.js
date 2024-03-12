@@ -25,12 +25,22 @@ function populateTable(data) {
         actionsCell.classList.add('align-middle'); // Vertically center content
 
         const editButton = document.createElement('button');
+        editButton.classList.add('btn');
+        editButton.classList.add('btn-warning');
+        editButton.classList.add('shadow-none');
+        editButton.classList.add('mx-2');
+
         editButton.innerHTML = '<ion-icon name="pencil-outline" class="modify"></ion-icon>';
         editButton.onclick = function() {
             openModalForEdit(row); // Open modal for editing
         };
 
         const deleteButton = document.createElement('button');
+        deleteButton.classList.add('btn');
+        deleteButton.classList.add('btn-danger');
+        deleteButton.classList.add('shadow-none');
+        deleteButton.classList.add('mx-2');
+        
         deleteButton.innerHTML = '<ion-icon name="trash-outline" class="delete"></ion-icon>';
         deleteButton.onclick = function() {
             deleteTask(row);
