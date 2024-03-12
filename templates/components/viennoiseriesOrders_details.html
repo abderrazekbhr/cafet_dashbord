@@ -1,50 +1,45 @@
-  <div class="salade">
-    {% include 'components/headOrders.html' %}
+<div class="salade">
+  {% include 'components/headOrders.html' %}
 
-  
-    <div class="card mask-custom">
-        <div class="card-body p-4 text-white">
-    
-          <div class="text-center pt-3 pb-2">
-            <h2 class="my-4">Pastries's Orders</h2>
-          </div>
-          <div class="table-container">
-          <table id="orders-table" class="table text-white mb-0">
-            <thead>
-              <tr>
-                <th scope="col">Date</th>
-                <th scope="col">Pain au chocolat</th>
-                <th scope="col">Croissant</th>
-                <th scope="col">Pains suisses</th>
-                <th scope="col">Actions</th>
-              </tr>
-            </thead>
-            <tbody id="orders-body">
-            
-            </tbody>
-          </table>
-          </div>
-
-           <!-- Bouton "+" pour ajouter une nouvelle ligne -->
-           <div class="text-center mt-3">
-            <button onclick="addNewRow()" class="btn btn-add-row"><ion-icon name="add-outline"></ion-icon> Ajouter une nouvelle ligne</button>
-
-        </div>
-    
-    
-        </div>
+  <div class="card mask-custom">
+    <div class="card-body p-4 ">
+      <div class="text-center pt-3 pb-2">
+        <h2 class="my-4">Pastries's Orders</h2>
       </div>
-   
+      <div class="table-container">
+        <table id="orders-table" class="table text-white mb-0">
+          <thead>
+            <tr>
+              <th scope="col">Date</th>
+              <th scope="col">Pain au chocolat</th>
+              <th scope="col">Croissant</th>
+              <th scope="col">Pains suisses</th>
+              <th scope="col">Actions</th>
+            </tr>
+          </thead>
+          <tbody id="orders-body">
+          </tbody>
+        </table>
+      </div>
+
      
     
+      
+    </div>
+  </div>
 </div>
 
+<!-- jQuery -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" crossorigin="anonymous"></script>
+<!-- Bootstrap JS -->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" crossorigin="anonymous"></script>
 
-
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-Qcd1oKv9yK9rdk3ZiCo6HKH2P4G9PcUO8LprZEaHk1Hn+B8OjDh7oKHTBnXr4S4EltT6zFyQ0c2wU9lq4pIXCg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<!-- Font Awesome CSS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" crossorigin="anonymous" />
+<!-- Ionicons JS -->
 <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
 <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+<!-- Custom CSS -->
 <link rel="stylesheet" href="../../static/css/viennoiseriesOrders.css">
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<!-- Custom JS -->
 <script src="../../static/js/viennoiseriesOrders.js"></script>
-  </script>

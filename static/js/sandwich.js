@@ -78,26 +78,24 @@ const createChart = (periode, ctx, column, chart) => {
     },
     options: {
       responsive: true,
-      animations: {
-        tension: {
-          duration: 2000,
-          easing: 'linear',
-          from: 0.5,
-          to: 0,
-          loop: true,
-        },
-      },
+
       plugins: {
         tooltip: {
           backgroundColor: 'rgba(106,86,61, 0.2)',
           titleColor: 'black',
           bodyColor: 'black',
-          titleFont: {
-            size: 16,
+
+          legend: {
+            labels: {
+              // This more specific font property overrides the global property
+              font: {
+                size: 14,
+                weight: 'bolder',
+              },
+            },
           },
-          bodyFont: {
-            size: 14,
-          },
+
+          
         },
       },
       interaction: {

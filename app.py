@@ -66,6 +66,11 @@ def main_orders_viennoiseries():
     if(session.get("token")=="connected"):
         return render_template('/pages/viennoiseriesOrders.html',css_file="main.css",js_file="main.js")
     return redirect("/", code=302) 
+@app.route('/main-orders-add',methods=['GET'])
+def main_orders_add():
+    if(session.get("token")=="connected"):
+        return render_template('/pages/addOrders.html',css_file="main.css",js_file="main.js")
+    return redirect("/", code=302) 
 
 @app.route('/predict', methods=['GET','POST'])
 def predict():
@@ -149,7 +154,18 @@ def get_viennoiseriesOrders_data():
         "Croissant",
         "Pains suisses",
     ]).to_json(orient='records')
- 
+@app.route('/update', methods=['POST'])
+def update_task():
+    data = request.json
+    # Update the corresponding row in the CSV file with the new data
+    # You need to implement this part based on your CSV file handling logic
+    return jsonify({'message': 'Task updated successfully'})
+@app.route('/add-order', methods=['POST'])
+def add_order():
+    data = request.json  # Récupérer les données envoyées depuis la requête POST
+    # Ajouter la nouvelle commande au fichier CSV en utilisant les données reçues
+    # Vous devrez implémenter cette partie en fonction de la logique de gestion de votre fichier CSV
+    return jsonify({'message': 'Order added successfully'})
 
 @app.errorhandler(404) 
 def default_url(e):
