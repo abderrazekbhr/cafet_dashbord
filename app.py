@@ -1,5 +1,6 @@
 from flask import Flask,render_template,request,redirect,session,jsonify
 from flask_session import Session
+import csv
 from classes_and_functions.functions.login_test import test_login,update_data
 from classes_and_functions.functions.read_data_csv import *
 
@@ -131,9 +132,26 @@ def update_task():
 def add_order():
     data = request.json  # Récupérer les données envoyées depuis la requête POST
     # Ajouter la nouvelle commande au fichier CSV en utilisant les données reçues
-    # Vous devrez implémenter cette partie en fonction de la logique de gestion de votre fichier CSV
+    with open('static/data_base/Final_Dataset.csv', 'a', newline='') as csvfile:
+        writer = csv.writer(csvfile)
+        writer.writerow([
+            data['date'],
+            data['saladeThon'],
+            data['saladePoulet'],
+            data['sandwichesPouletCrudites'],
+            data['sandwichesThonCrudites'],
+            data['sandwichesVegetarien'],
+            data['sandwichesPouletMexicain'],
+            data['sandwichesChevreMielCrudites'],
+            data['sandwichesPouletCurry'],
+            data['sandwichesSaumon'],
+            data['panini4Fromages'],
+            data['paniniPouletKebab'],
+            data['painAuChocolat'],
+            data['croissant'],
+            data['painsSuisses']
+        ])
     return jsonify({'message': 'Order added successfully'})
-
 @app.errorhandler(404) 
 def default_url(e):
     return redirect("/", code=302) 
