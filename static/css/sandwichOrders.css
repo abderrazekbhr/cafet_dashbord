@@ -60,7 +60,7 @@ tr:nth-child(even) {
 
 
   .mask-custom {
-    background: #6a563d81;
+    background: #6a563daa;
     border-radius: 2em;
     backdrop-filter: blur(25px);
     border: 2px solid rgba(255, 255, 255, 0.05);
