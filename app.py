@@ -168,6 +168,7 @@ def add_order():
     with open('static/data_base/Final_Dataset.csv', 'a', newline='') as csvfile:
         writer = csv.writer(csvfile)
         writer.writerow([
+            data['jour'],
             data['date'],
             data['saladeThon'],
             data['saladePoulet'],

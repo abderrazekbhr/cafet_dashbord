@@ -9,9 +9,23 @@ window.onload = function() {
 
 
 function addNewRow() {
+     // Get the current date in "dd/mm/yyyy" format
+     const currentDate = new Date();
+     const day = String(currentDate.getDate()).padStart(2, '0');
+     const month = String(currentDate.getMonth() + 1).padStart(2, '0'); // Month is zero-based
+     const year = currentDate.getFullYear();
+     const formattedDate = `${day}/${month}/${year}`;
+ 
+     // Update the date field value in the form
+     $('input[type="date"]').val(formattedDate);
+
+     // Default day
+    const defaultDay = "Mardi"; // Change this to whatever default day you want
+    
     // Obtenez les valeurs des champs du formulaire
     const formData = {
-        date: $('input[type="date"]').val(),
+        jour: defaultDay,
+        date: formattedDate,
         saladeThon: $('input[name="saladeThon"]').val(),
         saladePoulet: $('input[name="saladePoulet"]').val(),
         sandwichesPouletCrudites: $('input[name="sandwichesPouletCrudites"]').val(),
