@@ -9,55 +9,55 @@ window.onload = function() {
 
 
 function addNewRow() {
+     // Get the current date in "dd/mm/yyyy" format
+     const currentDate = new Date();
+     const day = String(currentDate.getDate()).padStart(2, '0');
+     const month = String(currentDate.getMonth() + 1).padStart(2, '0'); // Month is zero-based
+     const year = currentDate.getFullYear();
+     const formattedDate = `${day}/${month}/${year}`;
+ 
+     // Update the date field value in the form
+     $('input[type="date"]').val(formattedDate);
+
+     // Default day
+    const defaultDay = "Mardi"; // Change this to whatever default day you want
     
+    // Obtenez les valeurs des champs du formulaire
+    const formData = {
+        jour: defaultDay,
+        date: formattedDate,
+        saladeThon: $('input[name="saladeThon"]').val(),
+        saladePoulet: $('input[name="saladePoulet"]').val(),
+        sandwichesPouletCrudites: $('input[name="sandwichesPouletCrudites"]').val(),
+        sandwichesThonCrudites: $('input[name="sandwichesThonCrudites"]').val(),
+        sandwichesVegetarien: $('input[name="sandwichesVegetarien"]').val(),
+        sandwichesPouletMexicain: $('input[name="sandwichesPouletMexicain"]').val(),
+        sandwichesChevreMielCrudites: $('input[name="sandwichesChevreMielCrudites"]').val(),
+        sandwichesPouletCurry: $('input[name="sandwichesPouletCurry"]').val(),
+        sandwichesSaumon: $('input[name="sandwichesSaumon"]').val(),
+        panini4Fromages: $('input[name="panini4Fromages"]').val(),
+        paniniPouletKebab: $('input[name="paniniPouletKebab"]').val(),
+        painAuChocolat: $('input[name="painAuChocolat"]').val(),
+        croissant: $('input[name="croissant"]').val(),
+        painsSuisses: $('input[name="painsSuisses"]').val(),
+    };
 
-    if (formData !== null && formData.trim() !== "") {
-        // Séparez les données saisies en utilisant une virgule comme séparateur
-        const dataArray = formData.split(',');
-
-        // Assurez-vous qu'il y a suffisamment de données pour chaque colonne
-        if (dataArray.length >= 15) { // Mettez à jour le nombre de données en fonction de votre formulaire HTML
-            // Créez un objet pour contenir les données à envoyer
-            const newData = {
-                date: dataArray[0].trim(),
-                saladeThon: dataArray[1].trim(),
-                saladePoulet: dataArray[2].trim(),
-                // Ajoutez d'autres colonnes de données selon votre structure de données
-                sandwichesPouletCrudites: dataArray[3].trim(),
-                sandwichesThonCrudites: dataArray[4].trim(),
-                sandwichesVegetarien: dataArray[5].trim(),
-                sandwichesPouletMexicain: dataArray[6].trim(),
-                sandwichesChevreMielCrudites: dataArray[7].trim(),
-                sandwichesPouletCurry: dataArray[8].trim(),
-                sandwichesSaumon: dataArray[9].trim(),
-                panini4Fromages: dataArray[10].trim(),
-                paniniPouletKebab: dataArray[11].trim(),
-                painAuChocolat: dataArray[12].trim(),
-                croissant: dataArray[13].trim(),
-                painsSuisses: dataArray[14].trim(),
-            };
-
-            // Effectuez une requête POST vers l'endpoint Flask pour ajouter la commande
-            fetch('/add-order', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(newData)
-            })
-            .then(response => response.json())
-            .then(data => {
-                // Traitez la réponse si nécessaire
-                console.log(data);
-            })
-            .catch(error => {
-                console.error('Error adding order:', error);
-            });
-        } else {
-            // Si moins de données sont fournies, affichez un message d'erreur
-            alert("Veuillez saisir toutes les données nécessaires.");
-        }
-    }
+    // Effectuez une requête POST vers l'endpoint Flask pour ajouter la commande
+    fetch('/add-order', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(formData) // Envoyez les données sérialisées au backend
+    })
+    .then(response => response.json())
+    .then(data => {
+        // Affichez une alerte lorsque la commande est ajoutée avec succès
+        alert(data.message);
+    })
+    .catch(error => {
+        console.error('Error adding order:', error);
+    });
 }
 
 

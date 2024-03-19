@@ -21,12 +21,12 @@ const createChart = (periode, ctx, column, chart) => {
     console.log('destroying');
     chart.destroy();
   }
-  if (periode == 'week') {
+  if (periode == 'semaine') {
     localData = {
       x: data.map(d => d['Date']).slice(data.length - 5, data.length),
       y: data.map(d => d[column]).slice(data.length - 5, data.length),
     };
-  } else if (periode == 'month') {
+  } else if (periode == 'mois') {
     localData = {
       x: data.map(d => d['Date']).slice(data.length - 30, data.length),
       y: data.map(d => d[column]).slice(data.length - 30, data.length),
@@ -102,8 +102,8 @@ const createChart = (periode, ctx, column, chart) => {
 //intialize the chart and fetch data
 const main = async () => {
   await fetchData();
-  chartTon = createChart('week', ctx0, 'Salade Thon', chartTon);
-  chartPoulet = createChart('week', ctx1, 'Salade Poulet', chartPoulet);
+  chartTon = createChart('semaine', ctx0, 'Salade Thon', chartTon);
+  chartPoulet = createChart('semaine', ctx1, 'Salade Poulet', chartPoulet);
 };
 main();
 //events

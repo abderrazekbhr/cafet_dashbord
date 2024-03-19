@@ -1,7 +1,17 @@
 from flask import Flask,render_template,request,redirect,session,jsonify
 from flask_session import Session
+import csv
 from classes_and_functions.functions.login_test import test_login,update_data
 from classes_and_functions.functions.read_data_csv import *
+
+import pickle
+import numpy as np
+import pandas as pd
+
+# Load the trained models
+knn = pickle.load(open("classes_and_functions/pkl/knn.pkl", "rb"))
+svr = pickle.load(open("classes_and_functions/pkl/svr.pkl", "rb"))
+lasso = pickle.load(open("classes_and_functions/pkl/lasso.pkl", "rb"))
 
 app =Flask(__name__)
 app.config["SESSION_PERMANENT"] = False
@@ -63,6 +73,30 @@ def main_orders_add():
         return render_template('/pages/addOrders.html',css_file="main.css",js_file="main.js")
     return redirect("/", code=302) 
 
+@app.route('/predict', methods=['GET','POST'])
+def predict():
+    if session.get("token") == "connected":
+        if request.method == 'POST':
+            model_name = request.form['model']
+            lundi = float(request.form['lundi'])
+            mardi = float(request.form['mardi'])
+            mercredi = float(request.form['mercredi'])
+            jeudi = float(request.form['jeudi'])
+            vendredi = float(request.form['vendredi'])
+
+            features = np.array([[lundi], [mardi], [mercredi], [jeudi], [vendredi]])
+
+            if model_name == 'knn':
+                prediction = knn.predict(features)
+            elif model_name == 'svr':
+                prediction = svr.predict(features)
+            elif model_name == 'lasso':
+                prediction = lasso.predict(features)
+            else:
+                return "Invalid model selected"
+            return render_template('/pages/ml.html', predictions={model_name: prediction.tolist()},css_file="main.css", js_file="main.js")
+        return render_template('/pages/ml.html', css_file="main.css", js_file="main.js")
+    return redirect("/", code=302)
 
 @app.route('/logout',methods=['GET'])
 def logout():
@@ -131,9 +165,27 @@ def update_task():
 def add_order():
     data = request.json  # Récupérer les données envoyées depuis la requête POST
     # Ajouter la nouvelle commande au fichier CSV en utilisant les données reçues
-    # Vous devrez implémenter cette partie en fonction de la logique de gestion de votre fichier CSV
+    with open('static/data_base/Final_Dataset.csv', 'a', newline='') as csvfile:
+        writer = csv.writer(csvfile)
+        writer.writerow([
+            data['jour'],
+            data['date'],
+            data['saladeThon'],
+            data['saladePoulet'],
+            data['sandwichesPouletCrudites'],
+            data['sandwichesThonCrudites'],
+            data['sandwichesVegetarien'],
+            data['sandwichesPouletMexicain'],
+            data['sandwichesChevreMielCrudites'],
+            data['sandwichesPouletCurry'],
+            data['sandwichesSaumon'],
+            data['panini4Fromages'],
+            data['paniniPouletKebab'],
+            data['painAuChocolat'],
+            data['croissant'],
+            data['painsSuisses']
+        ])
     return jsonify({'message': 'Order added successfully'})
-
 @app.errorhandler(404) 
 def default_url(e):
     return redirect("/", code=302) 
