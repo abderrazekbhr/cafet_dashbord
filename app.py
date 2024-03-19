@@ -51,6 +51,16 @@ def main_viennoiseries():
         return render_template('/pages/viennoiseries.html',css_file="main.css",js_file="main.js")
     return redirect("/", code=302) 
 
+@app.route('/correlation',methods=['GET'])
+def correlation_page():
+    if(session.get("token")=="connected"):
+        return render_template('/pages/correlation.html',css_file="main.css",js_file="main.js")
+    return redirect("/", code=302) 
+
+@app.route('/get-correlation',methods=['GET'])
+def data_correlation():
+    return read_data_csv().drop(columns=['Date', 'Jour']).corr().to_json(orient='records')
+
 
 @app.route('/main-orders-salade',methods=['GET'])
 def main_orders_salade():
