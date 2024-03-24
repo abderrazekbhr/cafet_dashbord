@@ -100,7 +100,7 @@
   }
   #menu{
     width: 100%;
-    height: 30vh;
+    height: 50vh;
     display: flex;
     flex-direction: column;
     justify-content: space-around;

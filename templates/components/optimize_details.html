@@ -1,0 +1,53 @@
+<div class="salade">
+    <div class="container mt-5">
+        <h1 class="text-center">Optimisation des paramètres du modèle</h1>
+        
+        <form action="/optimize" method="post">
+            <div class="form-group">
+                <label for="product" class="label-product">Choisir un produit :</label>
+                <select id="product" name="product" class="form-control">
+                    <option value="all">Tous les produits</option>
+                    <option value="Pain au chocolat">Pain au chocolat</option>
+                    <option value="Croissant">Croissant</option>
+                    <option value="Pains suisses">Pains suisses</option>
+                    <option value="Sandwiches poulet crudités">Sandwiches poulet crudités</option>
+                    <option value="Sandwiches thon cruditès">Sandwiches thon cruditès</option>
+                    <option value="Sandwiches végétarien">Sandwiches végétarien</option>
+                    <option value="Sandwiches poulet mexicain">Sandwiches poulet mexicain</option>
+                    <option value="Sandwiches chèvre miel crudités">Sandwiches chèvre miel crudités</option>
+                    <option value="Sandwiches poulet curry">Sandwiches poulet curry</option>
+                    <option value="Sandwiches saumon">Sandwiches saumon</option>
+                    <option value="Panini 4 fromages">Panini 4 fromages</option>
+                    <option value="Panini poulet Kebab">Panini poulet Kebab</option>
+                    <option value="Salade Thon">Salade Thon</option>
+                    <option value="Salade Poulet">Salade Poulet</option>
+                </select>
+            </div>
+            <button type="submit" class="btn-add-row">Optimiser</button>
+        </form>
+
+        <div class="mask-custom">
+            <div class="card-body p-4">
+        
+            <div class="text-center pt-3 pb-2">
+                <h2 class="my-4">Liste de produits</h2>
+            </div>
+            <div class="table-container">
+            <table id="orders-table" class="table text-white mb-0">
+                <thead>
+                <tr class="justify-content-around">
+                    <th scope="col">Nom du produit</th>
+                    <th scope="col">Modèle associé</th>
+                    <th scope="col">Paramètre du modèle</th>
+                    <th scope="col">RMSE</th>
+                </tr>
+                </thead>
+                <tbody id="orders-body">
+                
+                </tbody>
+            </table>
+            </div>
+            </div>
+        </div>
+    </div>
+</div>    

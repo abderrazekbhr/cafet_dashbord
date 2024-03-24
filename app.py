@@ -3,15 +3,24 @@ from flask_session import Session
 import csv
 from classes_and_functions.functions.login_test import test_login,update_data
 from classes_and_functions.functions.read_data_csv import *
-
+from sklearn.model_selection import GridSearchCV
+from sklearn.linear_model import Lasso
+from sklearn.svm import SVR
+from sklearn.neighbors import KNeighborsRegressor
+from sklearn.metrics import mean_squared_error
 import pickle
 import numpy as np
 import pandas as pd
+from ml_grid import dicto
+from math import sqrt
+import subprocess
 
-# Load the trained models
-knn = pickle.load(open("classes_and_functions/pkl/knn.pkl", "rb"))
-svr = pickle.load(open("classes_and_functions/pkl/svr.pkl", "rb"))
-lasso = pickle.load(open("classes_and_functions/pkl/lasso.pkl", "rb"))
+# Define models for optimization
+models = {
+    'Lasso': (Lasso(), {'alpha': [0.0001, 0.001, 0.01, 0.1, 1, 10, 100, 1000, 10000, 100000]}),
+    'SVR': (SVR(), {'C': [0.0001, 0.001, 0.01, 0.1, 1, 10, 100, 1000, 10000, 100000], 'gamma': ['scale', 'auto', 0.0001, 0.001, 0.01, 0.1, 1, 10, 100]}),
+    'KNN': (KNeighborsRegressor(), {'n_neighbors': [1, 3, 5, 7, 10, 15, 20, 25, 30, 35, 40, 45, 50], 'weights': ['uniform', 'distance'], 'algorithm': ['auto', 'ball_tree', 'kd_tree', 'brute']}),
+}
 
 app =Flask(__name__)
 app.config["SESSION_PERMANENT"] = False
@@ -87,26 +96,167 @@ def main_orders_add():
 def predict():
     if session.get("token") == "connected":
         if request.method == 'POST':
+            data_test = pd.read_csv("static/data_base/Final_Dataset.csv")
             model_name = request.form['model']
-            lundi = float(request.form['lundi'])
-            mardi = float(request.form['mardi'])
-            mercredi = float(request.form['mercredi'])
-            jeudi = float(request.form['jeudi'])
-            vendredi = float(request.form['vendredi'])
-
-            features = np.array([[lundi], [mardi], [mercredi], [jeudi], [vendredi]])
-
-            if model_name == 'knn':
-                prediction = knn.predict(features)
-            elif model_name == 'svr':
-                prediction = svr.predict(features)
-            elif model_name == 'lasso':
-                prediction = lasso.predict(features)
+            chemin_model="classes_and_functions/pkl/"
+            if model_name == 'all':
+                products_to_process = ["Pain au chocolat", "Croissant", "Pains suisses",
+                                       "Sandwiches poulet crudités", "Sandwiches thon cruditès",
+                                       "Sandwiches végétarien", "Sandwiches poulet mexicain",
+                                       "Sandwiches chèvre miel crudités", "Sandwiches poulet curry",
+                                       "Sandwiches saumon", "Panini 4 fromages", "Panini poulet Kebab",
+                                       "Salade Thon", "Salade Poulet"]
+                for product in products_to_process:
+                    chemin_model_final = chemin_model + product + ".pkl"
+                    model = pickle.load(open(chemin_model_final, "rb"))
+                    prediction = model.predict(data_test[product].iloc[-5:].values.reshape(-1, 1))
+                    prediction_rounded = np.array([round(value, 2) for value in prediction])
+                    write_to_csv(product, prediction_rounded)
             else:
-                return "Invalid model selected"
-            return render_template('/pages/ml.html', predictions={model_name: prediction.tolist()},css_file="main.css", js_file="main.js")
+                chemin_model_final = chemin_model + model_name + ".pkl"
+                model = pickle.load(open(chemin_model_final, "rb"))
+                prediction = model.predict(data_test[model_name].iloc[-5:].values.reshape(-1, 1))
+                prediction_rounded = np.array([round(value, 2) for value in prediction])
+                write_to_csv(model_name, prediction_rounded)
+                
+            return render_template('/pages/ml.html', predictions={model_name: prediction_rounded.tolist()}, css_file="main.css", js_file="main.js")
         return render_template('/pages/ml.html', css_file="main.css", js_file="main.js")
     return redirect("/", code=302)
+
+@app.route('/optimize', methods=['GET', 'POST'])
+def optimize():
+    optimized_params = {}
+    rmse_scores = {}
+    best_model_name = None
+    best_rmse = float('inf')
+    best_model = None
+
+    # Liste des produits à traiter
+    products_to_process = ["Pain au chocolat", "Croissant", "Pains suisses",
+                           "Sandwiches poulet crudités", "Sandwiches thon cruditès",
+                           "Sandwiches végétarien", "Sandwiches poulet mexicain",
+                           "Sandwiches chèvre miel crudités", "Sandwiches poulet curry",
+                           "Sandwiches saumon", "Panini 4 fromages", "Panini poulet Kebab",
+                           "Salade Thon", "Salade Poulet"]
+
+    if request.method == 'POST':
+        subprocess.Popen(["python", "ml_grid.py"])
+        product = request.form['product']
+
+        # Si le produit est "all", traiter tous les produits de la liste
+        if product == "all":
+            for product in products_to_process:
+                # Traitement pour chaque produit
+                X_train = dicto[product]['X_train']
+                y_train = dicto[product]['y_train']
+                X_test = dicto[product]['X_test']
+                y_test = dicto[product]['y_test']
+
+                for model_name, (model, param_grid) in models.items():
+                    # Perform grid search for each model
+                    grid_search = GridSearchCV(model, param_grid, cv=5, scoring='neg_mean_squared_error')
+                    grid_search.fit(X_train, y_train)
+
+                    # Get the best parameters for each model
+                    optimized_params[model_name] = grid_search.best_params_
+
+                    # Calculate RMSE for each model
+                    current_model = grid_search.best_estimator_
+                    y_pred = current_model.predict(X_test)
+                    rmse = sqrt(mean_squared_error(y_test, y_pred))
+                    rmse_scores[model_name] = rmse
+
+                    # Check if this model has the lowest RMSE so far
+                    if rmse < best_rmse:
+                        best_model_name = model_name
+                        best_rmse = rmse
+                        best_model = current_model
+
+                # Save the best model to a pickle file with the product name
+                if best_model:
+                    filename = f"classes_and_functions/pkl/{product}.pkl"
+                    with open(filename, 'wb') as f:
+                        pickle.dump(best_model, f)
+
+                    # Update the CSV file
+                    with open('classes_and_functions/csv/grid.csv', 'r', newline='') as csvfile:
+                        reader = csv.reader(csvfile)
+                        rows = list(reader)
+                        for row in rows:
+                            if row and row[0] == product:
+                                row[1] = best_model_name
+                                row[2] = optimized_params[best_model_name]
+                                row[3] = best_rmse
+                                break
+                        else:
+                            rows.append([product, best_model_name, optimized_params[best_model_name], best_rmse])
+
+                    with open('classes_and_functions/csv/grid.csv', 'w', newline='') as csvfile:
+                        writer = csv.writer(csvfile)
+                        writer.writerows(rows)
+
+        else:
+            # Traitement pour un produit spécifique
+            X_train = dicto[product]['X_train']
+            y_train = dicto[product]['y_train']
+            X_test = dicto[product]['X_test']
+            y_test = dicto[product]['y_test']
+
+            for model_name, (model, param_grid) in models.items():
+                # Perform grid search for each model
+                grid_search = GridSearchCV(model, param_grid, cv=5, scoring='neg_mean_squared_error')
+                grid_search.fit(X_train, y_train)
+
+                # Get the best parameters for each model
+                optimized_params[model_name] = grid_search.best_params_
+
+                # Calculate RMSE for each model
+                current_model = grid_search.best_estimator_
+                y_pred = current_model.predict(X_test)
+                rmse = sqrt(mean_squared_error(y_test, y_pred))
+                rmse_scores[model_name] = rmse
+
+                # Check if this model has the lowest RMSE so far
+                if rmse < best_rmse:
+                    best_model_name = model_name
+                    best_rmse = rmse
+                    best_model = current_model
+
+            # Save the best model to a pickle file with the product name
+            if best_model:
+                filename = f"classes_and_functions/pkl/{product}.pkl"
+                with open(filename, 'wb') as f:
+                    pickle.dump(best_model, f)
+
+                # Lecture du fichier CSV en spécifiant l'encodage
+                with open('classes_and_functions/csv/grid.csv', 'r', newline='', encoding='utf-8') as csvfile:
+                    reader = csv.reader(csvfile)
+                    rows = list(reader)
+                    for row in rows:
+                        if row and row[0] == product:
+                            row[1] = best_model_name
+                            row[2] = optimized_params[best_model_name]
+                            row[3] = best_rmse
+                            break
+                    else:
+                        rows.append([product, best_model_name, optimized_params[best_model_name], best_rmse])
+
+                # Écriture des lignes mises à jour dans le fichier CSV en spécifiant l'encodage
+                with open('classes_and_functions/csv/grid.csv', 'w', newline='', encoding='utf-8') as csvfile:
+                    writer = csv.writer(csvfile)
+                    for row in rows:
+                        writer.writerow(row)
+
+    return render_template('/pages/optimize.html',css_file="optimize.css",js_file="optimizeDetails.js", optimized_params=optimized_params, rmse_scores=rmse_scores, best_model_name=best_model_name)
+
+@app.route('/get-grid-data', methods=['GET'])
+def get_grid_data():
+    return get_data_by_column_grid([
+        "Nom du produit",
+        "Modèle associé",
+        "Paramètre du modèle",
+        "RMSE"
+    ]).to_json(orient='records')
 
 @app.route('/logout',methods=['GET'])
 def logout():

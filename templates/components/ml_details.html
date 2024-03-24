@@ -5,26 +5,22 @@
         <form action="/predict" method="post">
             <label for="model" class="form-label">Choisir un produit:</label>
             <select id="model" name="model" class="form-select mb-3">
-                <option value="knn">Sandwiches poulet crudités</option>
-                <option value="svr">Panini 4 fromages</option>
-                <option value="lasso">Sandwiches thon cruditès</option>
+                <option value="all">Tous les produits</option>
+                <option value="Pain au chocolat">Pain au chocolat</option>
+                <option value="Croissant">Croissant</option>
+                <option value="Pains suisses">Pains suisses</option>
+                <option value="Sandwiches poulet crudités">Sandwiches poulet crudités</option>
+                <option value="Sandwiches thon cruditès">Sandwiches thon cruditès</option>
+                <option value="Sandwiches végétarien">Sandwiches végétarien</option>
+                <option value="Sandwiches poulet mexicain">Sandwiches poulet mexicain</option>
+                <option value="Sandwiches chèvre miel crudités">Sandwiches chèvre miel crudités</option>
+                <option value="Sandwiches poulet curry">Sandwiches poulet curry</option>
+                <option value="Sandwiches saumon">Sandwiches saumon</option>
+                <option value="Panini 4 fromages">Panini 4 fromages</option>
+                <option value="Panini poulet Kebab">Panini poulet Kebab</option>
+                <option value="Salade Thon">Salade Thon</option>
+                <option value="Salade Poulet">Salade Poulet</option>
             </select>
-
-            <label for="lundi" class="form-label">Lundi:</label>
-            <input type="number" id="lundi" name="lundi" class="form-control mb-3">
-
-            <label for="mardi" class="form-label">Mardi:</label>
-            <input type="number" id="mardi" name="mardi" class="form-control mb-3">
-
-            <label for="mercredi" class="form-label">Mercredi:</label>
-            <input type="number" id="mercredi" name="mercredi" class="form-control mb-3">
-
-            <label for="jeudi" class="form-label">Jeudi:</label>
-            <input type="number" id="jeudi" name="jeudi" class="form-control mb-3">
-
-            <label for="vendredi" class="form-label">Vendredi:</label>
-            <input type="number" id="vendredi" name="vendredi" class="form-control mb-3">
-
             <button type="submit" class="btn btn-success" style="background-color: #6a563d;border:1px solid #6a563d;">Prédire</button>
         </form>
     </div>
