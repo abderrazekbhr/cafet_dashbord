@@ -16,7 +16,7 @@ data_j_5 = data_j_5.reset_index(drop=True).dropna()
 dicto = {}
 
 for product in ["Pain au chocolat", "Croissant", "Pains suisses","Sandwiches poulet crudités",
-                "Sandwiches thon cruditès", "Sandwiches végétarien", "Sandwiches poulet mexicain",
+                "Sandwiches thon crudités", "Sandwiches végétarien", "Sandwiches poulet mexicain",
                 "Sandwiches chèvre miel crudités","Sandwiches poulet curry","Sandwiches saumon",
                 "Panini 4 fromages","Panini poulet Kebab", "Salade Thon","Salade Poulet"]:
     

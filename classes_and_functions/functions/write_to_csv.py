@@ -1,9 +1,11 @@
+import csv
+
 def write_to_csv(product, prediction):
     csv_file = 'classes_and_functions/csv/prediction.csv'
 
     # Lire le fichier CSV et stocker les données dans une liste
     try:
-        with open(csv_file, 'r', newline='') as csvfile:
+        with open(csv_file, 'r', newline='', encoding='utf-8') as csvfile:
             reader = csv.reader(csvfile)
             rows = list(reader)
     except FileNotFoundError:
@@ -22,7 +24,7 @@ def write_to_csv(product, prediction):
         rows.append([product] + prediction.tolist())
 
     # Écrire la liste mise à jour dans le fichier CSV
-    with open(csv_file, 'w', newline='') as f:
+    with open(csv_file, 'w', newline='', encoding='utf-8') as f:
         writer = csv.writer(f)
         writer.writerows(rows)
             

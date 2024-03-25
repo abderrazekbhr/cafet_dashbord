@@ -1,40 +1,54 @@
-<h1 class="mb-4">Prédiction des ventes</h1>
-
-<div class="container d-flex justify-content-between mt-4">
-    <div class="form-container bg-white p-4 rounded shadow-sm" style="width: 45%;">
+<div class="salade">    
+    <div class="container mt-5">
+        <h1 class="text-center">Prédiction des ventes</h1>
         <form action="/predict" method="post">
-            <label for="model" class="form-label">Choisir un produit:</label>
-            <select id="model" name="model" class="form-select mb-3">
-                <option value="all">Tous les produits</option>
-                <option value="Pain au chocolat">Pain au chocolat</option>
-                <option value="Croissant">Croissant</option>
-                <option value="Pains suisses">Pains suisses</option>
-                <option value="Sandwiches poulet crudités">Sandwiches poulet crudités</option>
-                <option value="Sandwiches thon cruditès">Sandwiches thon cruditès</option>
-                <option value="Sandwiches végétarien">Sandwiches végétarien</option>
-                <option value="Sandwiches poulet mexicain">Sandwiches poulet mexicain</option>
-                <option value="Sandwiches chèvre miel crudités">Sandwiches chèvre miel crudités</option>
-                <option value="Sandwiches poulet curry">Sandwiches poulet curry</option>
-                <option value="Sandwiches saumon">Sandwiches saumon</option>
-                <option value="Panini 4 fromages">Panini 4 fromages</option>
-                <option value="Panini poulet Kebab">Panini poulet Kebab</option>
-                <option value="Salade Thon">Salade Thon</option>
-                <option value="Salade Poulet">Salade Poulet</option>
-            </select>
-            <button type="submit" class="btn btn-success" style="background-color: #6a563d;border:1px solid #6a563d;">Prédire</button>
+            <div class="form-group">
+                <label for="model" class="label-product">Choisir un produit:</label>
+                <select id="model" name="model" class="form-select mb-3">
+                    <option value="all">Tous les produits</option>
+                    <option value="Pain au chocolat">Pain au chocolat</option>
+                    <option value="Croissant">Croissant</option>
+                    <option value="Pains suisses">Pains suisses</option>
+                    <option value="Sandwiches poulet crudités">Sandwiches poulet crudités</option>
+                    <option value="Sandwiches thon crudités">Sandwiches thon crudités</option>
+                    <option value="Sandwiches végétarien">Sandwiches végétarien</option>
+                    <option value="Sandwiches poulet mexicain">Sandwiches poulet mexicain</option>
+                    <option value="Sandwiches chèvre miel crudités">Sandwiches chèvre miel crudités</option>
+                    <option value="Sandwiches poulet curry">Sandwiches poulet curry</option>
+                    <option value="Sandwiches saumon">Sandwiches saumon</option>
+                    <option value="Panini 4 fromages">Panini 4 fromages</option>
+                    <option value="Panini poulet Kebab">Panini poulet Kebab</option>
+                    <option value="Salade Thon">Salade Thon</option>
+                    <option value="Salade Poulet">Salade Poulet</option>
+                </select>
+            </div>
+            <button type="submit" class="btn-add-row">Prédire</button>
         </form>
-    </div>
 
-    <div class="output-container bg-white p-4 rounded shadow-sm" style="width: 45%;">
-        {% if predictions %}
-            {% for model, prediction in predictions.items() %}
-                <h2 class="text-center mb-4">Résultats pour {{ model }}:</h2>
-                <ul class="list-unstyled text-center">
-                    {% for value in prediction %}
-                        <li>{{ value }}</li>
-                    {% endfor %}
-                </ul>
-            {% endfor %}
-        {% endif %}
+        <div class="mask-custom">
+            <div class="card-body p-4">
+        
+                <div class="text-center pt-3 pb-2">
+                    <h2 class="my-4">Liste de produits</h2>
+                </div>
+                <div class="table-container">
+                    <table id="orders-table" class="table text-white mb-0">
+                        <thead>
+                        <tr class="justify-content-around">
+                            <th scope="col">Nom du produit</th>
+                            <th scope="col">Lundi</th>
+                            <th scope="col">Mardi</th>
+                            <th scope="col">Mercredi</th>
+                            <th scope="col">Jeudi</th>
+                            <th scope="col">Vendredi</th>
+                        </tr>
+                        </thead>
+                        <tbody id="orders-body">
+                        
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
     </div>
 </div>

@@ -3,6 +3,7 @@ from flask_session import Session
 import csv
 from classes_and_functions.functions.login_test import test_login,update_data
 from classes_and_functions.functions.read_data_csv import *
+from classes_and_functions.functions.write_to_csv import *
 from sklearn.model_selection import GridSearchCV
 from sklearn.linear_model import Lasso
 from sklearn.svm import SVR
@@ -101,7 +102,7 @@ def predict():
             chemin_model="classes_and_functions/pkl/"
             if model_name == 'all':
                 products_to_process = ["Pain au chocolat", "Croissant", "Pains suisses",
-                                       "Sandwiches poulet crudités", "Sandwiches thon cruditès",
+                                       "Sandwiches poulet crudités", "Sandwiches thon crudités",
                                        "Sandwiches végétarien", "Sandwiches poulet mexicain",
                                        "Sandwiches chèvre miel crudités", "Sandwiches poulet curry",
                                        "Sandwiches saumon", "Panini 4 fromages", "Panini poulet Kebab",
@@ -119,8 +120,8 @@ def predict():
                 prediction_rounded = np.array([round(value, 2) for value in prediction])
                 write_to_csv(model_name, prediction_rounded)
                 
-            return render_template('/pages/ml.html', predictions={model_name: prediction_rounded.tolist()}, css_file="main.css", js_file="main.js")
-        return render_template('/pages/ml.html', css_file="main.css", js_file="main.js")
+            return render_template('/pages/ml.html', predictions={model_name: prediction_rounded.tolist()}, css_file="ml.css", js_file="ml.js")
+        return render_template('/pages/ml.html', css_file="ml.css", js_file="ml.js")
     return redirect("/", code=302)
 
 @app.route('/optimize', methods=['GET', 'POST'])
@@ -133,7 +134,7 @@ def optimize():
 
     # Liste des produits à traiter
     products_to_process = ["Pain au chocolat", "Croissant", "Pains suisses",
-                           "Sandwiches poulet crudités", "Sandwiches thon cruditès",
+                           "Sandwiches poulet crudités", "Sandwiches thon crudités",
                            "Sandwiches végétarien", "Sandwiches poulet mexicain",
                            "Sandwiches chèvre miel crudités", "Sandwiches poulet curry",
                            "Sandwiches saumon", "Panini 4 fromages", "Panini poulet Kebab",
@@ -257,6 +258,17 @@ def get_grid_data():
         "Paramètre du modèle",
         "RMSE"
     ]).to_json(orient='records')
+    
+@app.route('/get-predicted-data', methods=['GET'])
+def get_predicted_data():
+    return get_data_by_column_predict([
+        "Nom du produit",
+        "Lundi",
+        "Mardi",
+        "Mercredi",
+        "Jeudi",
+        "Vendredi"
+    ]).to_json(orient='records')
 
 @app.route('/logout',methods=['GET'])
 def logout():
@@ -279,7 +291,7 @@ def chart_salade():
 
 @app.route('/chart-data-sandwich',methods=['GET'])
 def chart_sandwich():
-    return get_data_by_column(["Date","Sandwiches poulet crudités","Sandwiches thon cruditès","Sandwiches végétarien","Sandwiches poulet mexicain","Sandwiches chèvre miel crudités","Sandwiches poulet curry","Sandwiches saumon","Panini 4 fromages","Panini poulet Kebab"]) .to_json(orient='records') 
+    return get_data_by_column(["Date","Sandwiches poulet crudités","Sandwiches thon crudités","Sandwiches végétarien","Sandwiches poulet mexicain","Sandwiches chèvre miel crudités","Sandwiches poulet curry","Sandwiches saumon","Panini 4 fromages","Panini poulet Kebab"]) .to_json(orient='records') 
  
 @app.route('/chart-data-viennoiseries',methods=['GET'])
 def chart_viennoiseries():
@@ -298,7 +310,7 @@ def get_sandwichOrders_data():
     return get_data_by_column([
         "Date",
         "Sandwiches poulet crudités",
-        "Sandwiches thon cruditès",
+        "Sandwiches thon crudités",
         "Sandwiches végétarien",
         "Sandwiches poulet mexicain",
         "Sandwiches chèvre miel crudités",
