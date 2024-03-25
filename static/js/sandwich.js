@@ -66,7 +66,11 @@ const createChart = (periode, ctx, column, chart) => {
       labels: localData.x,
       datasets: [
         {
+<<<<<<< HEAD
           label: column + ' Quantité',
+=======
+          label: 'Quantité : ' + column ,
+>>>>>>> a9e63f34404a8e334d8e170e67623c7d882c3511
           labelColor: 'rgb(106,86,61)',
           data: localData.y,
           borderWidth: 1,
@@ -131,7 +135,7 @@ const createChart = (periode, ctx, column, chart) => {
 const main = async () => {
   await fetchData();
   chart0 = createChart('semaine', ctx0, 'Sandwiches poulet crudités', chart0);
-  chart1 = createChart('semaine', ctx1, 'Sandwiches thon cruditès', chart1);
+  chart1 = createChart('semaine', ctx1, 'Sandwiches thon crudités', chart1);
   chart2 = createChart('semaine', ctx2, 'Sandwiches végétarien', chart2);
   chart3 = createChart('semaine', ctx3, 'Sandwiches poulet mexicain', chart3);
   chart4 = createChart('semaine', ctx4, 'Sandwiches chèvre miel crudités', chart4);
@@ -147,7 +151,7 @@ select0.addEventListener('change', e => {
   chart0 = createChart(e.target.value, ctx0, 'Sandwiches poulet crudités', chart0);
 });
 select1.addEventListener('change', async e => {
-  chart1 = createChart(e.target.value, ctx1, 'Sandwiches thon cruditès', chart1);
+  chart1 = createChart(e.target.value, ctx1, 'Sandwiches thon crudités', chart1);
 });
 select2.addEventListener('change', e => {
   chart2 = createChart(e.target.value, ctx2, 'Sandwiches végétarien', chart2);

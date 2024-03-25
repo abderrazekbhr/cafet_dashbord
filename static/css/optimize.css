@@ -1,0 +1,178 @@
+*{
+    text-decoration: none;
+}
+body{
+    width: 100vw;
+    overflow-x: hidden;
+}
+.combine{
+    display: grid;
+    grid-template-columns: 1fr 5fr;
+}
+
+::-webkit-scrollbar {
+    width: 0.5em;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    border-radius: 10px;
+  }
+   
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #6a563dae; 
+    border-radius: 10px;
+  }
+  .title {
+    text-align: center;
+    color: #6a563d;
+    font-weight: bold;
+}
+
+.sub-title {
+    text-align: center;
+    color: #6a563d;
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+.form-label {
+    color: black; /* Couleur du texte pour les labels */
+}
+
+.form-control {
+    width: 80%;
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    margin: 0 auto;
+    margin-bottom: 20px;
+}
+
+.btn-add-row {
+  background-color: #6a563d;
+  border: 2px solid #6a563d;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 20px;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin-top: 20px;
+  width: 40%;
+  margin-left: 30%; 
+  margin-right: 30%; 
+  transition: background-color 0.3s;
+}
+
+.btn-add-row:hover {
+  background-color: #4c3d2a;
+}
+
+.label-product{
+  margin-bottom: 10px;
+}
+
+.table-container {
+  overflow-x: auto;
+  max-height: 160px; /* Limite de 5 lignes pour le défilement vertical */
+  max-width: 90%; /* Limite la largeur maximale du conteneur */
+  margin-top: 30px; /* Ajoute de l'espace au-dessus du tableau */
+  margin-bottom: 20px;
+  margin-left: 50px;
+}
+
+table {
+  width: auto; /* Ajuste la largeur à son contenu */
+  max-width: 100%; /* Limite la largeur du tableau à 100% du conteneur */
+}
+
+th, td {
+  color: black; /* Couleur du texte */
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+  white-space: nowrap; /* Empêche le texte de se casser à la ligne */
+}
+thead{
+  border: #f1f1f1;
+}
+
+
+thead th {
+  top: 0;
+  z-index: 1; /* Assure que les en-têtes restent au-dessus du contenu du tableau */
+  background-color: #f2f2f2 !important;
+  border: none;
+   /* Couleur de fond des en-têtes */
+}
+
+tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+.mask-custom {
+  margin-top: 25px;
+  background: #f5f5f5;
+  border-radius: 2em;
+  backdrop-filter: blur(25px);
+  border: 2px solid rgba(255, 255, 255, 0.05);
+  background-clip: padding-box;
+  box-shadow: 10px 10px 10px rgba(46, 54, 68, 0.03);
+}
+
+.tbody{
+  position: sticky;
+}
+
+.salade {
+  background-color: white;
+  width: 80vw;
+  height: 100vh;
+  margin: 0 auto;
+  border-radius: 2em;
+  padding: 2em;
+  
+}
+
+/* Styles pour la fenêtre modale */
+.modal {
+  display: none; /* Par défaut, la fenêtre modale est cachée */
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0,0,0,0.5); /* Fond assombri */
+}
+
+/* Contenu de la fenêtre modale */
+.modal-content {
+  background-color: #fefefe;
+  margin: 15% auto; /* Centrer verticalement */
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+}
+
+/* Styles pour la barre de chargement */
+.loader {
+  border: 16px solid #f3f3f3;
+  border-top: 16px solid #3498db; /* Couleur de la barre de chargement */
+  border-radius: 50%;
+  width: 120px;
+  height: 120px;
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}

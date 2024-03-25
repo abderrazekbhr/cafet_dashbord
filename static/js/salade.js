@@ -44,7 +44,11 @@ const createChart = (periode, ctx, column, chart) => {
       labels: localData.x,
       datasets: [
         {
+<<<<<<< HEAD
           label: column + ' Quantité',
+=======
+          label: 'Quantité : ' + column ,
+>>>>>>> a9e63f34404a8e334d8e170e67623c7d882c3511
           labelColor: 'rgb(106,86,61)',
           data: localData.y,
           borderWidth: 1,
