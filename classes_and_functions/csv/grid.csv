@@ -1,15 +1,15 @@
 Nom du produit,Modèle associé,Paramètre du modèle,RMSE
-Pain au chocolat,SVR,"{'C': 1, 'gamma': 0.001}",12.0510323654823
-Croissant,KNN,"{'algorithm': 'brute', 'n_neighbors': 35, 'weights': 'uniform'}",10.0
-Pains suisses,SVR,"{'C': 1, 'gamma': 0.001}",8.305137748172505
-Sandwiches poulet crudités,KNN,"{'algorithm': 'auto', 'n_neighbors': 45, 'weights': 'uniform'}",2.494616425647661
-Sandwiches thon crudités,KNN,"{'algorithm': 'auto', 'n_neighbors': 25, 'weights': 'uniform'}",1.6079800993793427
-Sandwiches végétarien,SVR,"{'C': 1, 'gamma': 0.1}",0.2179839843607782
-Sandwiches poulet mexicain,KNN,"{'algorithm': 'brute', 'n_neighbors': 20, 'weights': 'uniform'}",1.9428072472584612
-Sandwiches poulet curry,SVR,"{'C': 1, 'gamma': 0.01}",0.2179839843607782
-Sandwiches saumon,SVR,"{'C': 1, 'gamma': 0.01}",0.09571901208941651
-Panini 4 fromages,SVR,"{'C': 0.1, 'gamma': 'scale'}",0.09571901208941651
-Panini poulet Kebab,SVR,"{'C': 10, 'gamma': 0.0001}",0.09571901208941651
-Salade Thon,SVR,"{'C': 100000, 'gamma': 0.0001}",0.09571901208941651
-Salade Poulet,SVR,"{'C': 100000, 'gamma': 0.0001}",0.09571901208941651
-Sandwiches chèvre miel crudités,SVR,"{'C': 10, 'gamma': 0.0001}",0.8024635962954029
+Pain au chocolat,SVR,"{'C': 1, 'gamma': 0.001}",10.823436189202262
+Croissant,KNN,"{'algorithm': 'brute', 'n_neighbors': 30, 'weights': 'uniform'}",7.68295371441074
+Pains suisses,SVR,"{'C': 10, 'gamma': 0.0001}",6.988104209461851
+Sandwiches poulet crudités,KNN,"{'algorithm': 'brute', 'n_neighbors': 45, 'weights': 'uniform'}",2.729192889328362
+Sandwiches thon crudités,Lasso,{'alpha': 0.0001},2.8825944850018015
+Sandwiches végétarien,SVR,"{'C': 1, 'gamma': 0.01}",0.13061870492440678
+Sandwiches poulet mexicain,SVR,"{'C': 1, 'gamma': 0.001}",2.5405956101252034
+Sandwiches chèvre miel crudités,Lasso,{'alpha': 0.0001},1.2925280116784792
+Sandwiches poulet curry,SVR,"{'C': 1, 'gamma': 'auto'}",2.974787524448857
+Sandwiches saumon,SVR,"{'C': 1, 'gamma': 0.01}",0.0957190120894129
+Panini 4 fromages,SVR,"{'C': 0.1, 'gamma': 'scale'}",0.963541760010714
+Panini poulet Kebab,SVR,"{'C': 10, 'gamma': 0.0001}",2.2534983483190896
+Salade Thon,SVR,"{'C': 10, 'gamma': 10}",2.7001538163816474
+Salade Poulet,SVR,"{'C': 10, 'gamma': 10}",2.8232750311741905
