@@ -75,6 +75,7 @@ function deleteTask(row) {
 function fillModal(row) {
     const cells = row.getElementsByTagName('td');
     const modalBody = document.querySelector('.modal-body');
+    
     modalBody.innerHTML = ''; // Clear previous modal body content
     
     const columnNames = ['Date', 'Salade Thon', 'Salade Poulet'];
@@ -85,7 +86,7 @@ function fillModal(row) {
         const input = document.createElement('input');
         input.type = 'text';
         input.value = cells[i].textContent;
-        input.name = `data${i + 1}`;
+        input.name = columnNames[i];
         
         // Create a div to contain label and input elements
         const div = document.createElement('div');
@@ -102,13 +103,12 @@ function fillModal(row) {
 function updateTask() {
     // Extract the updated data from the modal form
     const updatedData = {};
-    const formData = new FormData(document.getElementById('edit-form')); // Utiliser l'ID du formulaire
-
+    const formData = new FormData(document.querySelector('form')); // Utiliser l'ID du formulaire
     // Parcourir les données du formulaire et les ajouter à l'objet updatedData
     formData.forEach((value, key) => {
         updatedData[key] = value;
     });
-
+    console.log(updatedData);
     // Send updated data to server via POST request
     fetch('/update-salade', {
         method: 'POST',
@@ -118,6 +118,8 @@ function updateTask() {
         body: JSON.stringify(updatedData) // Convertir les données en JSON avant de les envoyer
     })
     .then(response => {
+        console.log('Réponse du serveur :', response);
+        window.location.reload();
         // Gérer la réponse du serveur
     })
     .catch(error => {

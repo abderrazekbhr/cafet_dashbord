@@ -74,24 +74,24 @@
 <!-- Modal -->
 <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
   <div class="modal-dialog">
-    <form action="http://127.0.0.1:5000/update"  method="post" class="modal-content">
+    <div  class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="staticBackdropLabel">Update your data </h5>
         <button type="button" class="btn-close shadow-none" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <div class="modal-body">
-        <div class="">
+      <form class="modal-body">
+        <!-- <div class="">
           <label for="email" class="form-label">Email address</label>
           <input type="email" class="form-control shadow-none" name="email" id="email" required />
         </div>
         <div class="">
           <label for="password" name="password" class="form-label">Password</label>
           <input type="password" class="form-control shadow-none" id="password" name="password" required />
-        </div>
-      </div>
+        </div> -->
+      </form>
       <div class="modal-footer">
-        <input type="submit" value="Update" class="update">
+        <input type="submit" onclick="updateTask()" value="Update" class="update">
       </div>
-    </form>
+    </div>
   </div>
 </div>
