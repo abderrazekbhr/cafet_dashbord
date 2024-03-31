@@ -72,6 +72,7 @@ function deleteTask(row) {
 // Function to fill the modal with task data for editing
 function fillModal(row) {
     const cells = row.getElementsByTagName('td');
+    
     const modalBody = document.querySelector('.modal-body');
     modalBody.innerHTML = ''; // Clear previous modal body content
     

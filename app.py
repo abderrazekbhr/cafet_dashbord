@@ -276,13 +276,13 @@ def logout():
     print(session.get("token"))
     return redirect("/", code=302)
 
-@app.route('/update',methods=['POST'])
-def update():
-    data=request.json
-    update_data(data)
-    session.clear()
-    print(session.get("token"))
-    render_template('/pages/login.html',css_file="login.css",js_file="login.js")
+# @app.route('/update',methods=['POST'])
+# def update():
+#     data=request.json
+#     update_data(data)
+#     session.clear()
+#     print(session.get("token"))
+#     render_template('/pages/login.html',css_file="login.css",js_file="login.js")
 
 
 @app.route('/chart-data-salade',methods=['GET'])
@@ -335,7 +335,7 @@ def update_task():
         'saladeThon': data['Salade Thon'],
         'saladePoulet': data['Salade Poulet']
     }
-
+    print(updated_data)
     # Mettre à jour les données du fichier CSV avec les données reçues
     filename = 'static/data_base/Final_Dataset.csv'
     with open(filename, 'r', newline='') as file:
