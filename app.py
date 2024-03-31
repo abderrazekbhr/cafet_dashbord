@@ -360,6 +360,90 @@ def update_task():
 
     return jsonify({'message': 'Task updated successfully'})
 
+@app.route('/update-sandwich', methods=['POST'])
+def update_task1():
+    data = request.json
+    updated_data = {
+        'date': data['Date'],
+        'pouletCrudites': data['Sandwiches poulet crudités'],
+        'thonCrudites': data['Sandwiches thon crudités'],
+        'vegetarien': data['Sandwiches végétarien'],
+        'pouletMexicain': data['Sandwiches poulet mexicain'],
+        'chevreMielCrudites': data['Sandwiches chèvre miel crudités'],
+        'pouletCurry': data['Sandwiches poulet curry'],
+        'saumon': data['Sandwiches saumon'],
+        'quatreFromages': data['Sandwiches 4 fromages'],
+        'pouletKebab': data['Sandwiches poulet Kebab']
+    }
+    print(updated_data)
+    # Mettre à jour les données du fichier CSV avec les données reçues
+    filename = 'static/data_base/Final_Dataset.csv'
+    with open(filename, 'r', newline='') as file:
+        reader = csv.reader(file)
+        rows = list(reader)
+
+        # Trouver l'index de la ligne à mettre à jour
+        row_index = 0
+        for index, row in enumerate(rows):
+            if row[1] == updated_data['date']:
+                row_index = index
+                break
+
+        # Mettre à jour la ligne dans la liste des lignes
+        rows[row_index][2] = updated_data['pouletCrudites']
+        rows[row_index][3] = updated_data['thonCrudites']
+        rows[row_index][4] = updated_data['vegetarien']
+        rows[row_index][5] = updated_data['pouletMexicain']
+        rows[row_index][6] = updated_data['chevreMielCrudites']
+        rows[row_index][7] = updated_data['pouletCurry']
+        rows[row_index][8] = updated_data['saumon']
+        rows[row_index][9] = updated_data['quatreFromages']
+        rows[row_index][10] = updated_data['pouletKebab']
+
+    # Écrire les données mises à jour dans le fichier CSV
+    with open(filename, 'w', newline='') as file:
+        writer = csv.writer(file)
+        writer.writerows(rows)
+
+    return jsonify({'message': 'Task updated successfully'})
+
+
+@app.route('/update-viennoiseries', methods=['POST'])
+def update_task2():
+    data = request.json
+    updated_data = {
+        'date': data['Date'],
+        'painChocolat': data['Pain au chocolat'],
+        'croissant': data['Croissant'],
+        'painsSuisses': data['Pains suisses']
+    }
+    print(updated_data)
+    # Mettre à jour les données du fichier CSV avec les données reçues
+    filename = 'static/data_base/Final_Dataset.csv'
+    with open(filename, 'r', newline='') as file:
+        reader = csv.reader(file)
+        rows = list(reader)
+
+        # Trouver l'index de la ligne à mettre à jour
+        row_index = 0
+        for index, row in enumerate(rows):
+            if row[1] == updated_data['date']:
+                row_index = index
+                break
+
+        # Mettre à jour la ligne dans la liste des lignes
+        rows[row_index][2] = updated_data['painChocolat']
+        rows[row_index][3] = updated_data['croissant']
+        rows[row_index][4] = updated_data['painsSuisses']
+
+    # Écrire les données mises à jour dans le fichier CSV
+    with open(filename, 'w', newline='') as file:
+        writer = csv.writer(file)
+        writer.writerows(rows)
+
+    return jsonify({'message': 'Task updated successfully'})
+
+
 @app.route('/add-order', methods=['POST'])
 def add_order():
     data = request.json  # Récupérer les données envoyées depuis la requête POST

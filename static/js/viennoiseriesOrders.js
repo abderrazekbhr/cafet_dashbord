@@ -100,24 +100,29 @@ function fillModal(row) {
 function updateTask() {
     // Extract the updated data from the modal form
     const updatedData = {};
-    // Fill updatedData object with form field values
-
+    const formData = new FormData(document.querySelector('form')); // Utiliser l'ID du formulaire
+    // Parcourir les données du formulaire et les ajouter à l'objet updatedData
+    formData.forEach((value, key) => {
+        updatedData[key] = value;
+    });
+    console.log(updatedData);
     // Send updated data to server via POST request
-    fetch('/update', {
+    fetch('/update-viennoiseries', {
         method: 'POST',
         headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json'  // Assurez-vous que le type de contenu est défini sur JSON
         },
-        body: JSON.stringify(updatedData)
+        body: JSON.stringify(updatedData) // Convertir les données en JSON avant de les envoyer
     })
     .then(response => {
-        // Handle response, e.g., update UI if successful
+        console.log('Réponse du serveur :', response);
+        window.location.reload();
+        // Gérer la réponse du serveur
     })
     .catch(error => {
-        console.error('Error updating task:', error);
+        console.error('Erreur lors de la mise à jour de la tâche :', error);
     });
 }
-
 // Function to open the modal with the selected row's data
 function openModalForEdit(row) {
     // Your existing code
