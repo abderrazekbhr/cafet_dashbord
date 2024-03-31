@@ -150,53 +150,5 @@ function closeModal() {
     $('.modal').modal('hide');
 }
 
-function addNewRow() {
-    // Boîte de dialogue pour saisir les données de la nouvelle ligne
-    const formData = prompt("Ajouter une nouvelle ligne", "Date, Salade Thon, Salade Poulet");
 
-    if (formData !== null && formData.trim() !== "") {
-        // Séparez les données saisies en utilisant une virgule comme séparateur
-        const dataArray = formData.split(',');
-
-        // Assurez-vous qu'il y a suffisamment de données pour chaque colonne
-        if (dataArray.length >= 3) {
-            const tableBody = document.getElementById('orders-body');
-            const newRow = document.createElement('tr');
-
-            // Ajoutez les données saisies dans chaque cellule de la nouvelle ligne
-            for (let i = 0; i < 3; i++) {
-                const cell = document.createElement('td');
-                cell.textContent = dataArray[i].trim();
-                newRow.appendChild(cell);
-            }
-
-            // Ajoutez les boutons d'action dans une cellule
-            const actionsCell = document.createElement('td');
-            actionsCell.classList.add('align-middle'); // Pour centrer verticalement le contenu
-
-            const editButton = document.createElement('button');
-            editButton.innerHTML = '<ion-icon name="pencil-outline" class="modify"></ion-icon>';
-            editButton.onclick = function() {
-                editTask(newRow);
-            };
-
-            const deleteButton = document.createElement('button');
-            deleteButton.innerHTML = '<ion-icon name="trash-outline" class="delete"></ion-icon>';
-            deleteButton.onclick = function() {
-                deleteTask(newRow);
-            };
-
-            actionsCell.appendChild(editButton);
-            actionsCell.appendChild(deleteButton);
-
-            newRow.appendChild(actionsCell);
-
-            // Ajoutez la nouvelle ligne au tableau
-            tableBody.appendChild(newRow);
-        } else {
-            // Si moins de trois données sont fournies, affichez un message d'erreur
-            alert("Veuillez saisir au moins une date, une salade thon et une salade poulet.");
-        }
-    }
-}
 
