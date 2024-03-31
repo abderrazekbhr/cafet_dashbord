@@ -1,10 +1,23 @@
-<div class="salade">    
+<div class="salade">
+    <!-- La fenêtre modale -->
+    <div id="loadingModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Chargement en cours...</h2>
+            </div>
+            <div class="modal-body">
+                <div class="loader"></div>
+            </div>
+        </div>
+    </div>
     <div class="container mt-5">
-        <h1 class="text-center">Prédiction des ventes</h1>
-        <form action="/predict" method="post">
+        <div class="loading-bar" id="loading-bar"></div>
+        <h1 class="text-center">Optimisation des paramètres du modèle</h1>
+        
+        <form action="/optimize" method="post">
             <div class="form-group">
-                <label for="model" class="label-product">Choisir un produit:</label>
-                <select id="model" name="model" class="form-select mb-3">
+                <label for="product" class="label-product">Choisir un produit :</label>
+                <select id="product" name="product" class="form-control">
                     <option value="all">Tous les produits</option>
                     <option value="Pain au chocolat">Pain au chocolat</option>
                     <option value="Croissant">Croissant</option>
@@ -22,7 +35,7 @@
                     <option value="Salade Poulet">Salade Poulet</option>
                 </select>
             </div>
-            <button type="submit" class="btn-add-row">Prédire</button>
+            <button type="submit" class="btn-add-row">Optimiser</button>
         </form>
 
         <div class="mask-custom">
@@ -36,11 +49,9 @@
                         <thead>
                         <tr class="justify-content-around">
                             <th scope="col">Nom du produit</th>
-                            <th scope="col">Lundi</th>
-                            <th scope="col">Mardi</th>
-                            <th scope="col">Mercredi</th>
-                            <th scope="col">Jeudi</th>
-                            <th scope="col">Vendredi</th>
+                            <th scope="col">Modèle associé</th>
+                            <th scope="col">Paramètre du modèle</th>
+                            <th scope="col">RMSE</th>
                         </tr>
                         </thead>
                         <tbody id="orders-body">
@@ -51,4 +62,4 @@
             </div>
         </div>
     </div>
-</div>
+</div>    

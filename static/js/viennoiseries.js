@@ -94,7 +94,7 @@ const createChart = (periode, ctx, column, chart) => {
           stacked: true,
           title: {
             display: true,
-            text: 'Quantity',
+            text: 'Quantité',
           },
           ticks: {
             color: '#000',
@@ -108,16 +108,10 @@ const createChart = (periode, ctx, column, chart) => {
 
 const main = async () => {
   await fetchData();
-<<<<<<< HEAD
   chart0 = createChart("semaine", ctx0, "Pain au chocolat", chart0);
   chart1 = createChart("semaine", ctx1, "Croissant", chart1);
   chart2 = createChart("semaine", ctx2, "Pains suisses", chart2);
   
-=======
-  chart0 = createChart('week', ctx0, 'Pain au chocolat', chart0);
-  chart1 = createChart('week', ctx1, 'Croissant', chart1);
-  chart2 = createChart('week', ctx2, 'Pains suisses', chart2);
->>>>>>> 4548c9e8fc26ce37de64bb28f1a950b16c4cddaa
 };
 main();
 

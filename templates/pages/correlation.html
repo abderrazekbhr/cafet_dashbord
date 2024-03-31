@@ -1,0 +1,129 @@
+{% extends './components/base.html' %} {% block content %}
+<div class="combine">
+  {% include './components/sidebar.html' %}
+  <div class="shadow correlation">
+    <table id="tab-corr" class="table text-white mb-0">
+      <thead>
+        <tr class="justify-content-around">
+          <th class="col"></th>
+          <th class="col">Croissant</th>
+          <th class="col">Pain au chocolat</th>
+          <th class="col">Pains suisses</th>
+          <th class="col">Panini 4 fromages</th>
+          <th class="col">Panini poulet Kebab</th>
+          <th class="col">Salade Poulet</th>
+          <th class="col">Salade Thon</th>
+          <th class="col">Sandwiches chèvre miel crudités</th>
+          <th class="col">Sandwiches poulet crudités</th>
+          <th class="col">Sandwiches poulet curry</th>
+          <th class="col">Sandwiches poulet mexicain</th>
+          <th class="col">Sandwiches saumon</th>
+          <th class="col">Sandwiches thon crudités</th>
+          <th class="col">Sandwiches végétarien</th>
+        </tr>
+      </thead>
+      <tbody id="corr-body">
+        <tr class="justify-content-around">
+          <th class="col">Croissant</th>
+        </tr>
+        <tr class="justify-content-around">
+          <th class="col">Pain au chocolat</th>
+        </tr>
+        <tr class="justify-content-around">
+          <th class="col">Pains suisses</th>
+        </tr>
+        <tr class="justify-content-around">
+          <th class="col">Panini 4 fromages</th>
+        </tr>
+        <tr class="justify-content-around">
+          <th class="col">Panini poulet Kebab</th>
+        </tr>
+        <tr class="justify-content-around">
+          <th class="col">Salade Poulet</th>
+        </tr>
+        <tr class="justify-content-around">
+          <th class="col">Salade Thon</th>
+        </tr>
+        <tr class="justify-content-around">
+          <th class="col">Sandwiches chèvre miel crudités</th>
+        </tr>
+        <tr class="justify-content-around">
+          <th class="col">Sandwiches poulet crudités</th>
+        </tr>
+        <tr class="justify-content-around">
+          <th class="col">Sandwiches poulet curry</th>
+        </tr>
+        <tr class="justify-content-around">
+          <th class="col">Sandwiches poulet mexicain</th>
+        </tr>
+        <tr class="justify-content-around">
+          <th class="col">Sandwiches saumon</th>
+        </tr>
+        <tr class="justify-content-around">
+          <th class="col">Sandwiches thon crudités</th>
+        </tr>
+        <tr class="justify-content-around">
+          <th class="col">Sandwiches végétarien</th>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<script>
+  window.onload = function () {
+    fetch('/get-correlation')
+      .then(response => response.json())
+      .then(data => {
+        const trs = document.querySelector('#corr-body').querySelectorAll('tr');
+        for (let i = 0; i < trs.length; i++) {
+          console.log(data[i]);
+          Object.values(data[i]).forEach(element => {
+            const tds = document.createElement('td');
+            tds.textContent = (Math.round(parseFloat(element) * 100) / 100).toFixed(2);;
+            trs[i].appendChild(tds);
+          });
+        }
+      });
+  };
+</script>
+<style>
+  .correlation {
+    display: grid;
+    margin: 1em auto;
+    border-radius: 2em;
+    padding: 1em;
+    overflow-y: scroll;
+  }
+
+  table {
+    display: table;
+    max-width: 60vw; /* Limite la largeur du tableau à 100% du conteneur */
+  }
+
+  th,
+  td {
+    color: black; /* Couleur du texte */
+    border: 1px solid #ddd;
+    text-align: left;
+    font-size: 12px;
+    white-space: wrap; /* Empêche le texte de se casser à la ligne */
+  }
+  thead {
+    border: #f1f1f1;
+  }
+
+  thead th,
+  tbody th {
+    position: sticky;
+    top: 0;
+    z-index: 1; /* Assure que les en-têtes restent au-dessus du contenu du tableau */
+    background-color: #f2f2f2 !important;
+    border: none;
+    /* Couleur de fond des en-têtes */
+  }
+  tbody tr th {
+    width: 25vw;
+    text-wrap: nowrap;
+  }
+</style>
+{% endblock %}

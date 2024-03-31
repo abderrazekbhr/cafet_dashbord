@@ -1,6 +1,6 @@
 // Function to fetch data and populate the orders table
 window.onload = function() {
-    fetch('/get-predicted-data')
+    fetch('/get-grid-data')
         .then(response => response.json())
         .then(data => {
             populateTable(data);

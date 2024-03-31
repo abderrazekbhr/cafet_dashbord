@@ -3,7 +3,7 @@ window.onload = function() {
     fetch('/get-sandwichOrders-data')
         .then(response => response.json())
         .then(data => {
-            populateTable(data);
+            populateTable(data.reverse());
         });
 };
 
@@ -78,7 +78,7 @@ function fillModal(row) {
     const columnNames = [
         'Date',
         'Sandwiches poulet crudités',
-        'Sandwiches thon cruditès',
+        'Sandwiches thon crudités',
         'Sandwiches végétarien',
         'Sandwiches poulet mexicain',
         'Sandwiches chèvre miel crudités',

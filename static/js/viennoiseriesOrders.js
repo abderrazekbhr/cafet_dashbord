@@ -3,7 +3,7 @@ window.onload = function() {
     fetch('/get-viennoiseriesOrders-data')
         .then(response => response.json())
         .then(data => {
-            populateTable(data);
+            populateTable(data.reverse());
         });
 };
 
