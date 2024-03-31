@@ -97,27 +97,34 @@ function fillModal(row) {
     }
 }
 
+
 // Function to update a task
 function updateTask() {
     // Extract the updated data from the modal form
     const updatedData = {};
-    // Fill updatedData object with form field values
+    const formData = new FormData(document.getElementById('edit-form')); // Utiliser l'ID du formulaire
+
+    // Parcourir les données du formulaire et les ajouter à l'objet updatedData
+    formData.forEach((value, key) => {
+        updatedData[key] = value;
+    });
 
     // Send updated data to server via POST request
-    fetch('/update', {
+    fetch('/update-salade', {
         method: 'POST',
         headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json'  // Assurez-vous que le type de contenu est défini sur JSON
         },
-        body: JSON.stringify(updatedData)
+        body: JSON.stringify(updatedData) // Convertir les données en JSON avant de les envoyer
     })
     .then(response => {
-        // Handle response, e.g., update UI if successful
+        // Gérer la réponse du serveur
     })
     .catch(error => {
-        console.error('Error updating task:', error);
+        console.error('Erreur lors de la mise à jour de la tâche :', error);
     });
 }
+
 
 // Function to open the modal with the selected row's data
 function openModalForEdit(row) {
@@ -134,55 +141,6 @@ function closeModal() {
     $('.modal').modal('hide');
 }
 
-function addNewRow() {
-    // Boîte de dialogue pour saisir les données de la nouvelle ligne
-    const formData = prompt("Ajouter une nouvelle ligne", "Date, Salade Thon, Salade Poulet");
-
-    if (formData !== null && formData.trim() !== "") {
-        // Séparez les données saisies en utilisant une virgule comme séparateur
-        const dataArray = formData.split(',');
-
-        // Assurez-vous qu'il y a suffisamment de données pour chaque colonne
-        if (dataArray.length >= 3) {
-            const tableBody = document.getElementById('orders-body');
-            const newRow = document.createElement('tr');
-
-            // Ajoutez les données saisies dans chaque cellule de la nouvelle ligne
-            for (let i = 0; i < 3; i++) {
-                const cell = document.createElement('td');
-                cell.textContent = dataArray[i].trim();
-                newRow.appendChild(cell);
-            }
-
-            // Ajoutez les boutons d'action dans une cellule
-            const actionsCell = document.createElement('td');
-            actionsCell.classList.add('align-middle'); // Pour centrer verticalement le contenu
-
-            const editButton = document.createElement('button');
-            editButton.innerHTML = '<ion-icon name="pencil-outline" class="modify"></ion-icon>';
-            editButton.onclick = function() {
-                editTask(newRow);
-            };
-
-            const deleteButton = document.createElement('button');
-            deleteButton.innerHTML = '<ion-icon name="trash-outline" class="delete"></ion-icon>';
-            deleteButton.onclick = function() {
-                deleteTask(newRow);
-            };
-
-            actionsCell.appendChild(editButton);
-            actionsCell.appendChild(deleteButton);
-
-            newRow.appendChild(actionsCell);
-
-            // Ajoutez la nouvelle ligne au tableau
-            tableBody.appendChild(newRow);
-        } else {
-            // Si moins de trois données sont fournies, affichez un message d'erreur
-            alert("Veuillez saisir au moins une date, une salade thon et une salade poulet.");
-        }
-    }
-}
 
 
 
