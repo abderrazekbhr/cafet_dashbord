@@ -25,12 +25,12 @@ for product in ["Pain au chocolat", "Croissant", "Pains suisses","Sandwiches pou
     #y prend les commandes des produits des jours présents
     y = data_j[product]
     # Séparez les 5 dernières lignes pour les prédictions
-    X_test = X[-5:]
-    y_test = y[-5:]
+    X_test = X[-10:]
+    y_test = y[-10:]
 
     # Les lignes restantes pour l'entraînement
-    X_train = X[:-5]
-    y_train = y[:-5]
+    X_train = X[:-10]
+    y_train = y[:-10]
     
     # Store X_train and y_train in the data dictionary
     dicto[product] = {'X_train': X_train, 'y_train': y_train,'X_test': X_test, 'y_test': y_test}

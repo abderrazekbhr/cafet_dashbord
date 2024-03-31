@@ -102,7 +102,7 @@ def predict():
             chemin_model="classes_and_functions/pkl/"
             if model_name == 'all':
                 products_to_process = ["Pain au chocolat", "Croissant", "Pains suisses",
-                                       "Sandwiches poulet crudités", "Sandwiches thon crudités",
+                                       "Sandwiches poulet crudités", "Sandwiches thon crudits",
                                        "Sandwiches végétarien", "Sandwiches poulet mexicain",
                                        "Sandwiches chèvre miel crudités", "Sandwiches poulet curry",
                                        "Sandwiches saumon", "Panini 4 fromages", "Panini poulet Kebab",
@@ -152,7 +152,6 @@ def optimize():
                 y_train = dicto[product]['y_train']
                 X_test = dicto[product]['X_test']
                 y_test = dicto[product]['y_test']
-
                 for model_name, (model, param_grid) in models.items():
                     # Perform grid search for each model
                     grid_search = GridSearchCV(model, param_grid, cv=5, scoring='neg_mean_squared_error')
@@ -180,7 +179,7 @@ def optimize():
                         pickle.dump(best_model, f)
 
                     # Update the CSV file
-                    with open('classes_and_functions/csv/grid.csv', 'r', newline='') as csvfile:
+                    with open('classes_and_functions/csv/grid.csv', 'r', newline='', encoding='utf-8') as csvfile:
                         reader = csv.reader(csvfile)
                         rows = list(reader)
                         for row in rows:
@@ -192,9 +191,10 @@ def optimize():
                         else:
                             rows.append([product, best_model_name, optimized_params[best_model_name], best_rmse])
 
-                    with open('classes_and_functions/csv/grid.csv', 'w', newline='') as csvfile:
+                    with open('classes_and_functions/csv/grid.csv', 'w', newline='', encoding='utf-8') as csvfile:
                         writer = csv.writer(csvfile)
                         writer.writerows(rows)
+                best_rmse=999
 
         else:
             # Traitement pour un produit spécifique
