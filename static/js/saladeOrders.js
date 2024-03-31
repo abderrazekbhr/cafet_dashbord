@@ -107,7 +107,6 @@ function updateTask() {
     // Parcourir les données du formulaire et les ajouter à l'objet updatedData
     formData.forEach((value, key) => {
         updatedData[key] = value;
-        console.log(key, value);
     });
     console.log(updatedData);
     // Send updated data to server via POST request
