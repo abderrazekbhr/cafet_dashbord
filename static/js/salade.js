@@ -12,6 +12,7 @@ const fetchData = async () => {
   if (data === null) {
     const response = await fetch(_url);
     data = await response.json();
+    console.log("--------->",data);
   }
 };
 

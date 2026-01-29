@@ -33,6 +33,10 @@ app.config["SESSION_TYPE"] = "filesystem"
 Session(app)
 
 
+@app.route('/portfolio')
+def portfolio():
+    return render_template('/pages/portfolio.html', css_file="portfolio.css", js_file="portfolio.js")
+
 @app.route('/', defaults={'path': ''})
 @app.route('/',methods=['GET','POST'])
 def login():
@@ -302,8 +306,8 @@ def chart_salade():
     session= SessionLocal()
     data=session.query(Order,product_order.c.product_id,product_order.c.quantity).join(product_order,Order.id==product_order.c.order_id).filter(product_order.c.product_id.in_(["Salade Thon","Salade Poulet"])).all()
     session.close()
-    print(data)
-    return get_data_by_column(["Date","Salade Thon","Salade Poulet"]) .to_json(orient='records') 
+    return data
+    # return get_data_by_column(["Date","Salade Thon","Salade Poulet"]) .to_json(orient='records') 
 
 @app.route('/chart-data-sandwich',methods=['GET'])
 def chart_sandwich():
